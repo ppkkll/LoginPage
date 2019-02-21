@@ -30,55 +30,68 @@
                 android:layout_gravity="center_horizontal"/>
 
             <EditText
+                android:id="@+id/etUsername"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/editextstyle"
-                android:hint="UserName" />
+                android:hint="UserName"
+                android:inputType="textPersonName" />
+
             <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
                 android:background="@drawable/editextstyle"
                 android:hint="Email"
-                android:layout_marginTop="40dp"
-                android:layout_height="wrap_content"
-                android:layout_width="300dp"
-                android:layout_gravity="center_horizontal"/>
+                android:inputType="textWebEmailAddress" />
+
             <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
                 android:background="@drawable/editextstyle"
                 android:hint="Password"
-                android:layout_marginTop="40dp"
-                android:layout_height="wrap_content"
-                android:layout_width="300dp"
-                android:layout_gravity="center_horizontal"/>
+                android:inputType="textPassword" />
 
             <LinearLayout
                 android:layout_width="344dp"
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/etAge"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="40dp"
-                    android:layout_marginLeft="5dp"
                     android:background="@drawable/editextstyle"
-                    android:hint="Age" />
+                    android:hint="Age"
+                    android:inputType="numberSigned" />
 
                 <EditText
+                    android:id="@+id/etSex"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
-                    android:layout_marginLeft="20dp"
                     android:background="@drawable/editextstyle"
-                    android:hint="Sex" />
+                    android:hint="Sex"
+                    android:inputType="textShortMessage" />
             </LinearLayout>
+
             <Button
-                android:background="@drawable/editextstyle"
-                android:textColor="@color/colorBackground"
-                android:text="@string/signup"
+                android:id="@+id/signupBtm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="40dp"/>
+                android:layout_marginTop="40dp"
+                android:background="@drawable/editextstyle"
+                android:text="@string/signup"
+                android:textColor="@color/colorBackground" />
 
 
             <LinearLayout
@@ -92,7 +105,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
                     android:text="SignUp"
-                    android:textSize="23dp"
+                    android:textSize="23sp"
                     android:layout_gravity="center_horizontal"/>
 
                 <LinearLayout
@@ -105,21 +118,21 @@
                         android:layout_width="45dp"
                         android:layout_height="45dp"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginRight="15dp"
+                        android:layout_marginEnd="15dp"
                         android:src="@drawable/facebook" />
 
                     <ImageView
                         android:layout_width="45dp"
                         android:layout_height="45dp"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginRight="15dp"
+                        android:layout_marginEnd="15dp"
                         android:src="@drawable/google" />
 
                     <ImageView
                         android:layout_width="45dp"
                         android:layout_height="45dp"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginRight="15dp"
+                        android:layout_marginEnd="15dp"
                         android:src="@drawable/instgram" />
                 </LinearLayout>
             </LinearLayout>
