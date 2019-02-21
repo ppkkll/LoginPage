@@ -1,5 +1,6 @@
 package com.fantasy_travel.loginpage;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -17,8 +18,11 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
     }
-}
 
+    Button signupSubmitBtn = findViewById(R.id.signupSubmitBtn);
+
+//    signupSubmitBtn =
+}
        /* getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         getActionBar().hide();
 

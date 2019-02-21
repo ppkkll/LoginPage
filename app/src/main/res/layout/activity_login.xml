@@ -34,13 +34,15 @@
                 android:layout_height="wrap_content"
                 android:layout_width="300dp"
                 android:layout_gravity="center_horizontal"/>
+
             <EditText
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
                 android:background="@drawable/editextstyle"
                 android:hint="Password"
-                android:layout_marginTop="40dp"
-                android:layout_height="wrap_content"
-                android:layout_width="300dp"
-                android:layout_gravity="center_horizontal"/>
+                android:inputType="textPassword" />
             <Button
                 android:background="@drawable/editextstyle"
                 android:textColor="@color/colorBackground"
