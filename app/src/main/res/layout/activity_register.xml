@@ -36,7 +36,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/editextstyle"
-                android:hint="UserName"
+                android:hint="@string/username"
                 android:inputType="textPersonName" />
 
             <EditText
@@ -46,7 +46,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/editextstyle"
-                android:hint="Email"
+                android:hint="@string/email"
                 android:inputType="textWebEmailAddress" />
 
             <EditText
@@ -56,7 +56,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/editextstyle"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="textPassword" />
 
             <LinearLayout
@@ -70,7 +70,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="40dp"
                     android:background="@drawable/editextstyle"
-                    android:hint="Age"
+                    android:hint="@string/age"
                     android:inputType="numberSigned" />
 
                 <EditText
@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
                     android:background="@drawable/editextstyle"
-                    android:hint="Sex"
+                    android:hint="@string/gender"
                     android:inputType="textShortMessage" />
             </LinearLayout>
 
@@ -104,7 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
-                    android:text="SignUp"
+                    android:text="@string/signup"
                     android:textSize="23sp"
                     android:layout_gravity="center_horizontal"/>
 

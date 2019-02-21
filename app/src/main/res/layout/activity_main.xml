@@ -24,7 +24,7 @@
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Main Activity"
+            android:text="@string/mainactivity"
             android:textSize="30sp"
             android:textStyle="bold"
             android:layout_gravity="center_horizontal"/>
@@ -36,19 +36,18 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/editextstyle"
-                android:text="SignUp"
+                android:text="@string/signup"
                 android:textColor="@color/colorBackground" />
 
             <Button
-                android:background="@drawable/editextstyle"
-                android:textColor="@color/colorBackground"
-                android:onClick="loginBtm"
-                android:text="Login"
+                android:id="@+id/loginButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
-                android:id="@+id/loginButton"/>
+                android:background="@drawable/editextstyle"
+                android:text="@string/login"
+                android:textColor="@color/colorBackground" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

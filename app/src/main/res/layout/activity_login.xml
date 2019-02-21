@@ -27,13 +27,6 @@
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:layout_gravity="center_horizontal"/>
-            <EditText
-                android:background="@drawable/editextstyle"
-                android:hint="UserName/Email/Phone"
-                android:layout_marginTop="40dp"
-                android:layout_height="wrap_content"
-                android:layout_width="300dp"
-                android:layout_gravity="center_horizontal"/>
 
             <EditText
                 android:layout_width="300dp"
@@ -41,7 +34,16 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/editextstyle"
-                android:hint="Password"
+                android:hint="@string/forgotinput"
+                android:inputType="text" />
+
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/editextstyle"
+                android:hint="@string/password"
                 android:inputType="textPassword" />
             <Button
                 android:background="@drawable/editextstyle"
@@ -51,14 +53,16 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"/>
+
             <Button
-                android:background="@drawable/editextstyle"
-                android:textColor="@color/colorBackground"
-                android:text="@string/create_acc"
+                android:id="@+id/createBtn"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="40dp"/>
+                android:layout_marginTop="40dp"
+                android:background="@drawable/editextstyle"
+                android:text="@string/create_acc"
+                android:textColor="@color/colorBackground" />
 
             <LinearLayout
                 android:layout_marginTop="115dp"
@@ -69,9 +73,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:text="Social Media Login"
-                    android:textSize="23dp"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/social"
+                    android:textSize="23sp"
                     android:layout_gravity="center_horizontal"/>
 
                 <LinearLayout

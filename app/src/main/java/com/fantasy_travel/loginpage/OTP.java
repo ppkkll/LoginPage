@@ -13,7 +13,5 @@ public class OTP extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_input);
     }
-
-
 }
 

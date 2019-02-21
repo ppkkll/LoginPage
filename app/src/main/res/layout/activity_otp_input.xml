@@ -24,17 +24,19 @@
                 android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/forget"
+                android:text="@string/OTP"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:layout_gravity="center_horizontal"/>
+
             <EditText
-                android:background="@drawable/editextstyle"
-                android:hint="Activation code"
-                android:layout_marginTop="40dp"
-                android:layout_height="wrap_content"
                 android:layout_width="300dp"
-                android:layout_gravity="center_horizontal"/>
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/editextstyle"
+                android:hint="@string/active"
+                android:inputType="number" />
 
             <Button
                 android:background="@drawable/editextstyle"

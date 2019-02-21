@@ -1,9 +1,21 @@
 <resources>
     <string name="app_name">LoginPage</string>
+    <string name="mainactivity">Main Page</string>
     <string name="login">Login</string>
     <string name="signup">Sign Up</string>
+    <string name="OTP">One Time Password</string>
     <string name="forget">Forget Password</string>
     <string name="next" >Next</string>
     <string name="submit">Submit</string>
     <string name="create_acc">Create New Account</string>
+    <string name="email">Email</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="age">Age</string>
+    <string name="gender">Gender</string>
+    <string name="newpass">New Password</string>
+    <string name="confirmpass">Confirm Password</string>
+    <string name="forgotinput">UserName/Email/Phone</string>
+    <string name="social">Social Media Platform Login</string>
+    <string name="active">Activation Code</string>
 </resources>

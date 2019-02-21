@@ -3,25 +3,26 @@ package com.fantasy_travel.loginpage;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
 
 public class Register extends AppCompatActivity {
-    EditText etUsername, etPassword;
-    Button signupBtm;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        Button CallOTPBtn = findViewById(R.id.signupSubmitBtn);
+        CallOTPBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent( Register.this, OTP.class);
+                startActivity(intent);
+            }
+        });
     }
 
-//    Button signupSubmitBtn = findViewById(R.id.signupSubmitBtn);
 
-//    signupSubmitBtn =
 }
        /* getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         getActionBar().hide();
