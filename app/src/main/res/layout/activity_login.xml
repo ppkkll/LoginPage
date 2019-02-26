@@ -15,27 +15,33 @@
         app:cardCornerRadius="4dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
             <TextView
-                android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
                 android:text="@string/login"
                 android:textSize="30sp"
-                android:textStyle="bold"
-                android:layout_gravity="center_horizontal"/>
-            <EditText
-                android:background="@drawable/editextstyle"
-                android:hint="UserName/Email/Phone"
-                android:layout_marginTop="40dp"
-                android:layout_height="wrap_content"
-                android:layout_width="300dp"
-                android:layout_gravity="center_horizontal"/>
+                android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/loginID"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/editextstyle"
+                android:hint="UserName/Email/Phone"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/LoginPassword"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -43,43 +49,48 @@
                 android:background="@drawable/editextstyle"
                 android:hint="Password"
                 android:inputType="textPassword" />
+
             <Button
+                android:id="@+id/Login_loginButton"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
                 android:background="@drawable/editextstyle"
-                android:textColor="@color/colorBackground"
                 android:text="@string/login"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="40dp"/>
+                android:textColor="@color/colorBackground" />
+
             <Button
-                android:background="@drawable/editextstyle"
-                android:textColor="@color/colorBackground"
-                android:text="@string/create_acc"
+                android:id="@+id/Login_RegisterButton"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="40dp"/>
+                android:layout_marginTop="40dp"
+                android:background="@drawable/editextstyle"
+                android:text="@string/create_acc"
+                android:textColor="@color/colorBackground" />
 
             <LinearLayout
-                android:layout_marginTop="115dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="115dp"
                 android:background="@color/colorPrimary"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginTop="25dp"
                     android:text="Social Media Login"
-                    android:textSize="23dp"
-                    android:layout_gravity="center_horizontal"/>
+                    android:textSize="23dp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_gravity="center_horizontal"
-                    >
+                    android:orientation="horizontal">
+
                     <ImageView
                         android:layout_width="45dp"
                         android:layout_height="45dp"
