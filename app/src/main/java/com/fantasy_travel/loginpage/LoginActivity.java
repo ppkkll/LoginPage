@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -38,8 +39,7 @@ public class LoginActivity extends AppCompatActivity {
                   Log.d("Backend", "button pressed");
                   //new Call().execute();
                   Log.d("Backend", "call executed ");
-                Intent intent = new Intent( LoginActivity.this, Dashboard.class);
-                startActivity(intent);
+
                 etUsername = (EditText) findViewById(R.id.loginID);
                  userName = etUsername.getText().toString();
                 // Log.d()
@@ -90,6 +90,25 @@ public class LoginActivity extends AppCompatActivity {
                 //  Log.d("Output from Server .... \n","new");
                 while ((output = br.readLine()) != null) {
                     Log.d("Backend", output);
+
+
+                    if(output.contains("200"))
+                    {  Log.d("Backend", "Contains 200");
+                        Intent intent = new Intent( LoginActivity.this, Dashboard.class);
+                        startActivity(intent);
+                    }
+                    else
+                    { Log.d("Backend", "Does not contain Contains 200");
+                        //Toast.makeText(LoginActivity.this,"Invalid Creadentials",Toast.LENGTH_SHORT);
+
+
+                        LoginActivity.this.runOnUiThread(new Runnable() {
+                            public void run() {
+                                Toast.makeText(LoginActivity.this, "Hello", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                    }
 
                 }
 

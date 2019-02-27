@@ -16,9 +16,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class Register extends AppCompatActivity {
-    EditText etUsername, etPassword;
+    //EditText etUsername, etPassword;
    // Button registerBtn;
-   Button registerBtn;
+    String userName  ,password,;
+    Button registerBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

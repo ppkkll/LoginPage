@@ -6,4 +6,5 @@
     <string name="next" >Next</string>
     <string name="submit">Submit</string>
     <string name="create_acc">Create New Account</string>
+    <string name="toast_message">This is a toast message</string>
 </resources>
