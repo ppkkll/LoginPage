@@ -18,7 +18,7 @@ import java.net.URL;
 public class Register extends AppCompatActivity {
     //EditText etUsername, etPassword;
    // Button registerBtn;
-    String userName  ,password,;
+    String userName  ,password;
     Button registerBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
