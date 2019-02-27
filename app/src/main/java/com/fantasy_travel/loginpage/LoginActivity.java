@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
             try {
 
 
-                String URL1="http://10.6.52.78:8080/Login?emailID="+userName+"&password="+password;
+                String URL1="http://10.6.48.1:8080/Login?emailID="+userName+"&password="+password;
                 Log.d("Backend",URL1);
                 URL url = new URL(URL1);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -97,6 +97,8 @@ public class LoginActivity extends AppCompatActivity {
                         Intent intent = new Intent( LoginActivity.this, Dashboard.class);
                         startActivity(intent);
                     }
+
+
                     else
                     { Log.d("Backend", "Does not contain Contains 200");
                         //Toast.makeText(LoginActivity.this,"Invalid Creadentials",Toast.LENGTH_SHORT);
@@ -104,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         LoginActivity.this.runOnUiThread(new Runnable() {
                             public void run() {
-                                Toast.makeText(LoginActivity.this, "Hello", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
                             }
                         });
 
