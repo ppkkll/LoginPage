@@ -97,6 +97,14 @@ public class LoginActivity extends AppCompatActivity {
                         Intent intent = new Intent( LoginActivity.this, Dashboard.class);
                         startActivity(intent);
                     }
+                   else if(output.contains("500"))
+                    {  Log.d("Backend", "Contains 200");
+                        LoginActivity.this.runOnUiThread(new Runnable() {
+                            public void run() {
+                                Toast.makeText(LoginActivity.this, "Account Not Active", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
 
 
                     else

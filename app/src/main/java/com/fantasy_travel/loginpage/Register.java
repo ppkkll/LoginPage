@@ -191,6 +191,7 @@ String serverIP="10.6.48.1";
                             getSharedPreferences("com.myOTP.FantasyTravel", Context.MODE_PRIVATE);
 
 //Save it
+                    preferences.edit().putString("emailID",emailID ).commit();
                     preferences.edit().putInt("OTP",otp ).commit();
                     Intent intent = new Intent( Register.this, OTP.class);
                     startActivity(intent);
