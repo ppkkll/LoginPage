@@ -36,6 +36,13 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                LoginActivity.this.runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast.makeText(LoginActivity.this, "Processing", Toast.LENGTH_SHORT).show();
+                    }
+                });
                   Log.d("Backend", "button pressed");
                   //new Call().execute();
                   Log.d("Backend", "call executed ");

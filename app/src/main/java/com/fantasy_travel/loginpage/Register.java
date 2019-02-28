@@ -40,6 +40,12 @@ String serverIP="10.6.48.1";
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Register.this.runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast.makeText(Register.this, "Processing", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 Log.d("Backend", "button pressed");
                 //new Call().execute();
                 Log.d("Backend", "call executed ");
