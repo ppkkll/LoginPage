@@ -30,33 +30,33 @@
                 android:layout_gravity="center_horizontal"/>
 
             <EditText
-                android:id="@+id/etUsername"
+                android:id="@+id/Reg_phoneNumber"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/editextstyle"
-                android:hint="@string/username"
-                android:inputType="textPersonName" />
+                android:hint="Phone Number"
+                android:inputType="phone" />
 
             <EditText
-                android:id="@+id/etEmail"
+                android:id="@+id/Reg_Email"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/editextstyle"
-                android:hint="@string/email"
+                android:hint="Email"
                 android:inputType="textWebEmailAddress" />
 
             <EditText
-                android:id="@+id/etPassword"
+                android:id="@+id/Reg_Password"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/editextstyle"
-                android:hint="@string/password"
+                android:hint="Password"
                 android:inputType="textPassword" />
 
             <LinearLayout
@@ -64,23 +64,23 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/etAge"
+                    android:id="@+id/Reg_Age"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="40dp"
                     android:background="@drawable/editextstyle"
-                    android:hint="@string/age"
-                    android:inputType="numberSigned" />
+                    android:hint="Age"
+                    android:inputType="number" />
 
                 <EditText
-                    android:id="@+id/etSex"
+                    android:id="@+id/Reg_Sex"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
                     android:background="@drawable/editextstyle"
-                    android:hint="@string/gender"
-                    android:inputType="textShortMessage" />
+                    android:hint="Sex"
+                    android:inputType="textPersonName" />
             </LinearLayout>
 
             <Button
@@ -104,7 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
-                    android:text="@string/signup"
+                    android:text="SignUp"
                     android:textSize="23sp"
                     android:layout_gravity="center_horizontal"/>
 

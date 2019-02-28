@@ -24,28 +24,30 @@
                 android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/OTP"
+                android:text="@string/forget"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:layout_gravity="center_horizontal"/>
 
             <EditText
+                android:id="@+id/OTP_OTP"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/editextstyle"
-                android:hint="@string/active"
+                android:hint="Activation code"
                 android:inputType="number" />
 
             <Button
-                android:background="@drawable/editextstyle"
-                android:textColor="@color/colorBackground"
-                android:text="@string/submit"
+                android:id="@+id/validate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="40dp"/>
+                android:layout_marginTop="40dp"
+                android:background="@drawable/editextstyle"
+                android:text="@string/submit"
+                android:textColor="@color/colorBackground" />
 
 
         </LinearLayout>
