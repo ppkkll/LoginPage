@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorBackground">#FFFFFF</color>
     <color name="colorAccent">@android:color/white</color>
+    <color name="colorsidebar_Header">#6480FF</color>
 </resources>
