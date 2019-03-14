@@ -24,6 +24,7 @@ public class Register extends AppCompatActivity {
     EditText etUsername, etPassword,etAge,etSex,etPhoneNumber;
     Button registerBtn;
     String   phoneNumber,password,age,sex,emailID;
+    //shadjahdkshjhdkajs
 String serverIP="10.6.48.1";
     String serverIP1="10.6.35.144";
    // Button registerBtn;
