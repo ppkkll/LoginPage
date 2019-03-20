@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import com.fantasy_travel.loginpage.Misc;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
@@ -80,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
             try {
 
 
-                String URL1="http://10.6.35.144:8080/Login?emailID="+userName+"&password="+password;
+                String URL1=Misc.Url+"Login?emailID="+userName+"&password="+password;
                 Log.d("Backend",URL1);
                 URL url = new URL(URL1);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
