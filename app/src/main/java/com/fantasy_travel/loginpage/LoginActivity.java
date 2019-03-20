@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
             try {
 
 
-                String URL1=Misc.Url+"Login?emailID="+userName+"&password="+password;
+                String URL1 = Misc.Url + "Login?emailID=" + userName + "&password=" + password;
                 Log.d("Backend",URL1);
                 URL url = new URL(URL1);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();

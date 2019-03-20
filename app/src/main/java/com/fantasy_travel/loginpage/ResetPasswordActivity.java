@@ -23,9 +23,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     EditText etConfirmPass;
     Button btnSubmit;
     String emailID="";
-    String serverIP1="10.6.35.144";
 
-    String empty="e231";
     @Override
     protected void onCreate(Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
@@ -76,7 +74,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
 
                 emailID=     preferences.getString("emailID",emailID);
-                String URL1="http://"+serverIP1+":8080/Updatepassword?emailID="+emailID;
+                String URL1=Misc.Url+ "/Updatepassword?emailID="+emailID;
 
                 URL url = new URL(URL1);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();

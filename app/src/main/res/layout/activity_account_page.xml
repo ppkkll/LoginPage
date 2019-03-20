@@ -148,8 +148,8 @@
                     android:src="@drawable/ic_smartphone_black_24dp"/>
 
                 <EditText
+                    android:id="@+id/AC_PhoneNo"
                     android:layout_width="wrap_content"
-
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:inputType="phone"
