@@ -19,7 +19,7 @@ public class ListActivity extends AppCompatActivity {
             String[] Test = {"One","Two","Three","Four","Five"};
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.activity_listview,Test);
 
-            //ListView list = (ListView) findViewById(R.id.listView);
-            //list.setAdapter(adapter);
+            ListView list = (ListView) findViewById(R.id.listView);
+            list.setAdapter(adapter);
         }
 }
