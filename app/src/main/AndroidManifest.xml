@@ -57,7 +57,7 @@
         <activity
             android:name=".OTP"
             android:label="@string/app_name"
-            android:parentActivityName=".Dashboard">
+            android:parentActivityName=".OTP">
         </activity>
         <activity android:name=".ListActivity"
             android:label="@string/app_name"
@@ -67,6 +67,10 @@
         <activity android:name=".SidebarActivity"
             android:label="@string/app_name"
             android:parentActivityName=".SidebarActivity">
+        </activity>
+        <activity android:name=".AccountActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".AccountActivity">
         </activity>
     </application>
 
