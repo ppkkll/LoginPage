@@ -25,7 +25,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     String emailID="";
     String serverIP1="10.6.35.144";
 
-
+    String empty="e231";
     @Override
     protected void onCreate(Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
