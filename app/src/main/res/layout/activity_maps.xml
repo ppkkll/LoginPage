@@ -10,21 +10,23 @@
 
         <EditText
             android:id="@+id/location_search"
-            android:layout_width="410dp"
+            android:layout_width="340dp"
             android:layout_height="50dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
             android:ems="10"
-            android:hint="Search Destination ?"/>
+            android:hint="Search Destination ?" />
 
         <ImageButton
             android:id="@+id/search_destination"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
             android:onClick="onClick"
-            android:src="@mipmap/search"/>
+            android:src="@mipmap/search" />
 
         <Button
             android:id="@+id/Search_button"
@@ -38,6 +40,81 @@
             android:onClick="onClick"
             android:text="Search My Buddy !!" />
 
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="72dp"
+            android:text="PREFERENCES" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginStart="140dp"
+            android:layout_marginTop="50dp"
+            android:text="Travel Mode" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginStart="125dp"
+            android:layout_marginTop="72dp"
+            android:text="Drive" />
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:layout_marginStart="165dp"
+            android:layout_marginTop="70dp"
+            android:textOff="driving"
+            android:textOn="walking"/>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginStart="210dp"
+            android:layout_marginTop="72dp"
+            android:text="Walk" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginStart="300dp"
+            android:layout_marginTop="50dp"
+            android:text="Sex" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginStart="270dp"
+            android:layout_marginTop="72dp"
+            android:text="Male" />
+
+        <Switch
+            android:id="@+id/switch2"
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:layout_marginStart="305dp"
+            android:layout_marginTop="70dp"
+            android:textOff="Male"
+            android:textOn="Female"
+            />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginStart="350dp"
+            android:layout_marginTop="72dp"
+            android:text="Female" />
+
     </RelativeLayout>
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
@@ -47,9 +124,10 @@
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="45dp"
+    android:layout_marginTop="100dp"
     android:layout_marginBottom="45dp"
     tools:context=".Maps" />
+
 
 
 

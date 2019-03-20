@@ -7,5 +7,11 @@
     <string name="submit">Submit</string>
     <string name="create_acc">Create New Account</string>
     <string name="toast_message">This is a toast message</string>
-    <string name="title_activity_dashboard">Map</string>
+    <string name="OTP">One Time password</string>
+    <string name="forgotinput">Forgot Input</string>
+    <string name="mainactivity">Main activity</string>
+    <string name="newpass">New password</string>
+    <string name="confirmpass">Confirm password</string>
+    <string name="title_activity_dashboard">Dashboard Title</string>
+
 </resources>

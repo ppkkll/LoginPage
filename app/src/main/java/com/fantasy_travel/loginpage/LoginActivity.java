@@ -51,7 +51,9 @@ public class LoginActivity extends AppCompatActivity {
                 // Log.d()
                 etPassword = (EditText) findViewById(R.id.LoginPassword);
                  password = etPassword.getText().toString();
-                 new Call().execute();
+                Intent intent = new Intent( LoginActivity.this, Maps.class);
+                startActivity(intent);
+                 //new Call().execute();
             }
         });
 

@@ -20,6 +20,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -63,12 +64,17 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
     public String distance, duration;
     private LatLng latLng;
     public PolylineOptions polylineOptions1;
+    private Switch mode, sex;
+    private String mode_value, sex_value;
     //public
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        mode = (Switch) findViewById(R.id.switch1);
+       // sex = (Switch) findViewById(R.id.switch2);
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
         {
@@ -155,6 +161,17 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
                 dataTransfer[2] = new LatLng(dest_latitude, dest_longitude);
                 getDirectionsData.execute(dataTransfer); */
 
+               String mode_value1, sex_value1;
+               if (mode.isChecked())
+               {
+                   mode_value = mode.getTextOn().toString();
+                   Log.d("backend", "mode :"+mode_value);
+               }
+               else
+               {
+                   mode_value = mode.getTextOff().toString();
+                   Log.d("backend", "mode :"+mode_value);
+               }
                 new CallForDis().execute();
                 Toast.makeText(this, "processing !!!", Toast.LENGTH_SHORT).show();
                 try {
@@ -184,12 +201,18 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
                 markerOptions.title(s1);
                 markerOptions.snippet(s2);
                 mMap.addMarker(markerOptions);
+                if(mode_value.equals("walking")){
+                    polylineOptions1.color(Color.BLUE);
+                }
+                else{
+                    polylineOptions1.color(Color.RED);
+                }
                 mMap.addPolyline(polylineOptions1);
                 break;
         }
     }
 
-    private String getDirectionsUrl()
+    /*private String getDirectionsUrl()
     {
         StringBuilder googleDirectionsUrl = new StringBuilder("https://maps.googleapis.com/maps/api/directions/json?");
         googleDirectionsUrl.append("origin="+start_latitude+","+start_longitude);
@@ -197,7 +220,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
         googleDirectionsUrl.append("&key="+"AIzaSyAj76-gXJ5gvXrjp12YlLA90xEokK7O234");
 
         return googleDirectionsUrl.toString();
-    }
+    }*/
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -330,7 +353,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
 
             try
             {
-                String URL1="https://maps.googleapis.com/maps/api/directions/json?origin="+start_latitude+","+start_longitude+"&destination="+dest_latitude+","+dest_longitude+"&key=AIzaSyAj76-gXJ5gvXrjp12YlLA90xEokK7O234";
+                String URL1="https://maps.googleapis.com/maps/api/directions/json?origin="+start_latitude+","+start_longitude+"&destination="+dest_latitude+","+dest_longitude+"&mode="+mode_value+"&key=AIzaSyAj76-gXJ5gvXrjp12YlLA90xEokK7O234";
 
                 URL url = new URL(URL1);
                 HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
@@ -384,7 +407,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
                 Log.d("backend","in polyline"+ count);
                 Log.d("backend","in polyline"+ directionsList[i]);
                 //PolylineOptions polylineOptions1 = new PolylineOptions();
-                polylineOptions.color(Color.BLUE);
+
                 polylineOptions.width(10);
                 polylineOptions.addAll(PolyUtil.decode(directionsList[i]));
                 Log.d("backend","about to add polyline"+ directionsList[i]);
