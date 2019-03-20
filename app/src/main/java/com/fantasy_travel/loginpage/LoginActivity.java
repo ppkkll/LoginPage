@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -52,7 +51,9 @@ public class LoginActivity extends AppCompatActivity {
                 // Log.d()
                 etPassword = (EditText) findViewById(R.id.LoginPassword);
                  password = etPassword.getText().toString();
-                 new Call().execute();
+                Intent intent = new Intent( LoginActivity.this, Maps.class);
+                startActivity(intent);
+                 //new Call().execute();
             }
         });
 
@@ -101,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     if(output.contains("200"))
                     {  Log.d("Backend", "Contains 200");
-                        Intent intent = new Intent( LoginActivity.this, Dashboard.class);
+                        Intent intent = new Intent( LoginActivity.this, Maps.class);
                         startActivity(intent);
                     }
                    else if(output.contains("500"))
