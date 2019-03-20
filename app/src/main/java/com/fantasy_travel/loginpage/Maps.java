@@ -91,16 +91,20 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
     {
 
         Object dataTransfer[] = new Object[2];
+        EditText addressField = (EditText) findViewById(R.id.location_search);
+        String address = addressField.getText().toString();
 
+        List<Address> addressList = null;
+        MarkerOptions userMarkerOptions = new MarkerOptions();
 
         switch (v.getId())
         {
             case R.id.search_destination :
-                EditText addressField = (EditText) findViewById(R.id.location_search);
+                /*EditText addressField = (EditText) findViewById(R.id.location_search);
                 String address = addressField.getText().toString();
 
                 List<Address> addressList = null;
-                MarkerOptions userMarkerOptions = new MarkerOptions();
+                MarkerOptions userMarkerOptions = new MarkerOptions();*/
                 if(!TextUtils.isEmpty(address))
                 {
                     Geocoder geocoder = new Geocoder(this);
@@ -161,54 +165,65 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
                 dataTransfer[2] = new LatLng(dest_latitude, dest_longitude);
                 getDirectionsData.execute(dataTransfer); */
 
-               String mode_value1, sex_value1;
-               if (mode.isChecked())
-               {
-                   mode_value = mode.getTextOn().toString();
-                   Log.d("backend", "mode :"+mode_value);
-               }
-               else
-               {
-                   mode_value = mode.getTextOff().toString();
-                   Log.d("backend", "mode :"+mode_value);
-               }
-                new CallForDis().execute();
-                Toast.makeText(this, "processing !!!", Toast.LENGTH_SHORT).show();
-                try {
+                if(!TextUtils.isEmpty(address))
+                {
+                    if (mode.isChecked())
+                    {
+                        mode_value = mode.getTextOn().toString();
+                        Log.d("backend", "mode :"+mode_value);
+                    }
+                    else
+                    {
+                        mode_value = mode.getTextOff().toString();
+                        Log.d("backend", "mode :"+mode_value);
+                    }
 
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                mMap.clear();
-                MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.position(new LatLng(dest_latitude, dest_longitude));
-                //markerOptions.draggable(true);
-               // float results[] = new float[10];
+                    new CallForDis().execute();
+                    Toast.makeText(this, "processing !!!", Toast.LENGTH_SHORT).show();
+                    try {
 
-                SharedPreferences preferences =
-                        getSharedPreferences("com.myOTP.FantasyTravel", Context.MODE_PRIVATE);
-                String duration1= "";
-                duration1=      preferences.getString("duration",duration1);
-                String distance1="";
-                        distance1=  preferences.getString("distance",distance1);
-                Log.d("backend", "duration23 :"+duration1);
-                Log.d("backend", "distance23 :"+distance1);
-                String s1= "Duration="+String.valueOf(duration1);
-                String s2= "Distance="+String.valueOf(distance1);
-                Log.d("backend", "duration :"+s1);
-                Log.d("backend", "distance :"+s2);
-                markerOptions.title(s1);
-                markerOptions.snippet(s2);
-                mMap.addMarker(markerOptions);
-                if(mode_value.equals("walking")){
-                    polylineOptions1.color(Color.BLUE);
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    mMap.clear();
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    markerOptions.position(new LatLng(dest_latitude, dest_longitude));
+                    //markerOptions.draggable(true);
+                    // float results[] = new float[10];
+
+                    SharedPreferences preferences =
+                            getSharedPreferences("com.myOTP.FantasyTravel", Context.MODE_PRIVATE);
+                    String duration1= "";
+                    duration1=      preferences.getString("duration",duration1);
+                    String distance1="";
+                    distance1=  preferences.getString("distance",distance1);
+                    Log.d("backend", "duration23 :"+duration1);
+                    Log.d("backend", "distance23 :"+distance1);
+                    String s1= "Duration="+String.valueOf(duration1);
+                    String s2= "Distance="+String.valueOf(distance1);
+                    Log.d("backend", "duration :"+s1);
+                    Log.d("backend", "distance :"+s2);
+                    markerOptions.title(s1);
+                    markerOptions.snippet(s2);
+                    mMap.addMarker(markerOptions);
+                    if(mode_value.equals("walking")){
+                        polylineOptions1.color(Color.BLUE);
+                    }
+                    else{
+                        polylineOptions1.color(Color.RED);
+                    }
+                    mMap.addPolyline(polylineOptions1);
                 }
-                else{
-                    polylineOptions1.color(Color.RED);
+                else
+                {
+                    Toast.makeText(this,"No destination entered !!!",Toast.LENGTH_SHORT).show();
                 }
-                mMap.addPolyline(polylineOptions1);
                 break;
+
+            case R.id.Search_button1 :
+                Toast.makeText(this, "Nothing to process right now !!!", Toast.LENGTH_SHORT).show();
+
         }
     }
 
