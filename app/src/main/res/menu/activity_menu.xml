@@ -10,6 +10,7 @@
     <item   android:id="@+id/nav_Daily_Commute"
         android:icon="@mipmap/baseline_input_black_18dp"
         android:title="Daily Commute"/>
+
     <item   android:id="@+id/nav_Setting"
         android:icon="@mipmap/baseline_settings_black_18dp"
         android:title="My Setting"/>
