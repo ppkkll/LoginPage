@@ -52,9 +52,9 @@ public class LoginActivity extends AppCompatActivity {
                 // Log.d()
                 etPassword = (EditText) findViewById(R.id.LoginPassword);
                  password = etPassword.getText().toString();
-                Intent intent = new Intent( LoginActivity.this, Maps.class);
-                startActivity(intent);
-                 //new Call().execute();
+                //Intent intent = new Intent( LoginActivity.this, Maps.class);
+                //startActivity(intent);
+                 new Call().execute();
             }
         });
 
@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
             try {
 
 
-                String URL1="http://192.168.0.186:8080/Login?emailID="+userName+"&password="+password;
+                String URL1="http://10.6.35.144:8080/Login?emailID="+userName+"&password="+password;
                 Log.d("Backend",URL1);
                 URL url = new URL(URL1);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
