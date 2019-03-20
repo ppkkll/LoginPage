@@ -18,4 +18,5 @@
     <string name="Avatar">Avatar</string>
     <string name="forgotinput">Forgot Input</string>
     <string name="test">test</string>
+    <string name="IPAdddress">10.6.35.144:8080</string>
 </resources>
