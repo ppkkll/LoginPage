@@ -12,16 +12,21 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
+import android.annotation.SuppressLint;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.location.LocationListener;
@@ -66,12 +71,25 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
     public PolylineOptions polylineOptions1;
     private Switch mode, sex;
     private String mode_value, sex_value;
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mToggle;
     //public
-
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        mDrawerLayout = findViewById( R.id.Map_Drawer);
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        mToggle = new ActionBarDrawerToggle(this,mDrawerLayout, R.string.open,R.string.close);
+//
+        mDrawerLayout.addDrawerListener(mToggle);
+        mToggle.syncState();
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
 
         mode = (Switch) findViewById(R.id.switch1);
        // sex = (Switch) findViewById(R.id.switch2);
@@ -85,6 +103,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
+
 
 
     public void onClick(View v)
@@ -360,6 +379,17 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(mToggle.onOptionsItemSelected(item)){
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     class CallForDis extends AsyncTask {
 
@@ -466,5 +496,9 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
             markerOptions.snippet("Distance : "+distance);
             mMap1.addMarker(markerOptions);*/
         }
-    }
+
+
+
+}
+
 

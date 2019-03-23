@@ -19,4 +19,5 @@
     <string name="forgotinput">Forgot Input</string>
     <string name="test">test</string>
     <string name="IPAdddress">10.6.35.144:8080</string>
+    <string name="map_Dashboard_Indicator"> ← Dashboard</string>
 </resources>
