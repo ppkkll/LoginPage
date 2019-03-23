@@ -42,6 +42,7 @@ import com.google.maps.android.PolyUtil;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
@@ -66,6 +67,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
     public PolylineOptions polylineOptions1;
     private Switch mode, sex;
     private String mode_value, sex_value;
+    public String server3="";
     //public
 
     @Override
@@ -221,8 +223,16 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
                 }
                 break;
 
+
             case R.id.Search_button1 :
                 Toast.makeText(this, "Nothing to process right now !!!", Toast.LENGTH_SHORT).show();
+                new CallForSettingLocation().execute();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                new CallForFindTraveller().execute();
 
         }
     }
@@ -466,5 +476,110 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
             markerOptions.snippet("Distance : "+distance);
             mMap1.addMarker(markerOptions);*/
         }
+
+
+    class CallForSettingLocation extends AsyncTask {
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+
+            try {
+                SharedPreferences preferences =
+                        getSharedPreferences("com.myOTP.FantasyTravel", Context.MODE_PRIVATE);
+
+
+            String    emailID=  "";
+                emailID=     preferences.getString("emailID",emailID);
+                String URL1="http://10.6.35.144:8080/InsertLocData?id="+emailID+"&startLong="+start_longitude+"&endLong="+dest_longitude+"&startLat="+start_latitude+"&endLat="+dest_latitude;
+                Log.d("Backend",URL1);
+                URL url = new URL(URL1);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                // conn.setRequestProperty("Accept", "application/json");
+                Log.d("Backend", "request posted successfully");
+                if (conn.getResponseCode() != 200) {
+                    throw new RuntimeException("Failed : HTTP error code : "
+                            + conn.getResponseCode());
+                }
+
+                BufferedReader br = new BufferedReader(new InputStreamReader(
+                        (conn.getInputStream())));
+
+                String output;
+                //  Log.d("Output from Server .... \n","new");
+                while ((output = br.readLine()) != null) {
+                    Log.d("Backend", output);
+
+                }
+
+
+                conn.disconnect();
+
+            } catch (Exception e) {
+
+
+                Log.d("Backend", "exception in HTTP");
+                e.printStackTrace();
+
+            }
+
+            return null;
+        }
+    }
+
+
+
+    class CallForFindTraveller extends AsyncTask {
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+
+            try {
+                SharedPreferences preferences =
+                        getSharedPreferences("com.myOTP.FantasyTravel", Context.MODE_PRIVATE);
+
+
+                String    emailID=  "";
+                emailID=     preferences.getString("emailID",emailID);
+                String URL1="http://10.6.34.45:8080/checkForGroup?id="+emailID;
+                        Log.d("Backend",URL1);
+
+                URL url = new URL(URL1);
+                while (true) {
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("POST");
+                    // conn.setRequestProperty("Accept", "application/json");
+                    Log.d("Backend", "request posted successfully");
+                    if (conn.getResponseCode() != 200) {
+                        throw new RuntimeException("Failed : HTTP error code : "
+                                + conn.getResponseCode());
+                    }
+
+                    BufferedReader br = new BufferedReader(new InputStreamReader(
+                            (conn.getInputStream())));
+
+                    String output;
+                    //  Log.d("Output from Server .... \n","new");
+                    while ((output = br.readLine()) != null) {
+                        Log.d("Backend", output);
+
+                    }
+                    conn.disconnect();
+                    Log.d("Backend", "Thread sleeping");
+                    Thread.sleep(10000);
+                }
+
+
+            } catch (Exception e) {
+
+
+                Log.d("Backend", "exception in HTTP");
+                e.printStackTrace();
+
+            }
+
+            return null;
+        }
+    }
     }
 
