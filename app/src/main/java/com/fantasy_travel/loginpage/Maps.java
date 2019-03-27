@@ -74,15 +74,14 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     //public
-    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        mDrawerLayout = findViewById( R.id.Map_Drawer);
+        mDrawerLayout = (DrawerLayout) findViewById( R.id.Map_Drawer);
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         mToggle = new ActionBarDrawerToggle(this,mDrawerLayout, R.string.open,R.string.close);
 //
         mDrawerLayout.addDrawerListener(mToggle);

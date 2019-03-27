@@ -29,15 +29,15 @@ public class ResetPasswordActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_resetpassword );
 
-            btnSubmit = findViewById(R.id.FP_Submit);
+            btnSubmit = (Button) findViewById(R.id.FP_Submit);
 
             btnSubmit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-             etPass = findViewById(R.id.FP_NewPass);
+             etPass = (EditText) findViewById(R.id.FP_NewPass);
              Pass = etPass.getText().toString();
 
-             etConfirmPass = findViewById(R.id.FP_ConfirmPass);
+             etConfirmPass = (EditText) findViewById(R.id.FP_ConfirmPass);
              ConfirmPass = etConfirmPass.getText().toString();
 
              if (Pass.equals(String.valueOf("")) || ConfirmPass.equals(String.valueOf(""))){

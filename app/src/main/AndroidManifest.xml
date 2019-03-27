@@ -12,13 +12,17 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
@@ -57,25 +61,28 @@
         <activity
             android:name=".OTP"
             android:label="@string/app_name"
-            android:parentActivityName=".OTP">
-        </activity>
-        <activity android:name=".ListActivity"
+            android:parentActivityName=".OTP"></activity>
+        <activity
+            android:name=".ListActivity"
             android:label="@string/app_name"
-            android:parentActivityName=".ListActivity">
-        </activity>
+            android:parentActivityName=".ListActivity"></activity>
 
-        <activity android:name=".SidebarActivity"
+        <activity
+            android:name=".SidebarActivity"
             android:label="@string/app_name"
-            android:parentActivityName=".SidebarActivity">
-        </activity>
-        <activity android:name=".AccountActivity"
+            android:parentActivityName=".SidebarActivity"></activity>
+        <activity
+            android:name=".AccountActivity"
             android:label="@string/app_name"
-            android:parentActivityName=".AccountActivity">
-        </activity>
-        <activity android:name=".ResetPasswordActivity"
+            android:parentActivityName=".AccountActivity"></activity>
+        <activity
+            android:name=".ResetPasswordActivity"
             android:label="@string/app_name"
-            android:parentActivityName=".ResetPasswordActivity">
-        </activity>
+            android:parentActivityName=".ResetPasswordActivity"></activity>
+        <activity
+            android:name=".P2PMainActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>

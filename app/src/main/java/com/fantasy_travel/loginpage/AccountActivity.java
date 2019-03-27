@@ -26,11 +26,11 @@ public class AccountActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_page);
-        etPhone = findViewById(R.id.AC_PhoneNo);
+        etPhone = (EditText) findViewById(R.id.AC_PhoneNo);
         Phone = etPhone.getText().toString();
 
-        btnChangePass = findViewById(R.id.btnChangePass);
-        btnSave = findViewById(R.id.savebtn);
+        btnChangePass = (Button) findViewById(R.id.btnChangePass);
+        btnSave = (Button) findViewById(R.id.savebtn);
 
 
         btnChangePass.setOnClickListener(new View.OnClickListener() {
