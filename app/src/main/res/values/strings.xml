@@ -17,7 +17,8 @@
     <string name="close">Close</string>
     <string name="Avatar">Avatar</string>
     <string name="forgotinput">Forgot Input</string>
-    <string name="test">Offline Mode</string>
+    <string name="Offline">Offline Mode</string>
+    <string name="test">Test Mode</string>
     <string name="IPAdddress">10.6.35.144:8080</string>
     <string name="map_Dashboard_Indicator"> ← Dashboard</string>
 </resources>

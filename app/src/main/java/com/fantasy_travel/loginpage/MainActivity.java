@@ -14,10 +14,10 @@ public class MainActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_main);
        // init();
 
-        Button signupBtm = (Button) findViewById(R.id.signupButton);
+        Button signupBtn = (Button) findViewById(R.id.signupButton);
 
 
-        signupBtm.setOnClickListener(new View.OnClickListener() {
+        signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent( MainActivity.this, Register.class);
@@ -26,10 +26,10 @@ public class MainActivity extends AppCompatActivity  {
 
             }
         });
-        Button loginBtm = (Button) findViewById(R.id.loginButton);
+        Button loginBtn = (Button) findViewById(R.id.loginButton);
 
 
-        loginBtm.setOnClickListener(new View.OnClickListener() {
+        loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent( MainActivity.this, LoginActivity.class);
@@ -38,12 +38,22 @@ public class MainActivity extends AppCompatActivity  {
         });
 
 
-        Button testBtm = (Button) findViewById(R.id.testButton);
+        Button offLineBtn = (Button) findViewById(R.id.OfflineButton);
 
-        testBtm.setOnClickListener(new View.OnClickListener() {
+        offLineBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent( MainActivity.this, P2PMainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button testBtn = (Button) findViewById(R.id.testButton);
+
+        testBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent( MainActivity.this, SidebarActivity.class);
                 startActivity(intent);
             }
         });

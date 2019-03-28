@@ -2,6 +2,7 @@ package com.fantasy_travel.loginpage;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -79,14 +80,79 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        mDrawerLayout = (DrawerLayout) findViewById( R.id.Map_Drawer);
+        mDrawerLayout = findViewById(R.id.Map_Drawer);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        mToggle = new ActionBarDrawerToggle(this,mDrawerLayout, R.string.open,R.string.close);
-//
-        mDrawerLayout.addDrawerListener(mToggle);
-        mToggle.syncState();
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mDrawerLayout.addDrawerListener(
+                new DrawerLayout.DrawerListener() {
+                    @Override
+                    public void onDrawerSlide(View drawerView, float slideOffset) {
+                        // Respond when the drawer's position changes
+                    }
+
+                    @Override
+                    public void onDrawerOpened(View drawerView) {
+                        // Respond when the drawer is opened
+                    }
+
+                    @Override
+                    public void onDrawerClosed(View drawerView) {
+                        // Respond when the drawer is closed
+                    }
+
+                    @Override
+                    public void onDrawerStateChanged(int newState) {
+                        // Respond when the drawer motion state changes
+                    }
+                });
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(
+
+
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        // set item as selected to persist highlight
+                        menuItem.setChecked(true);
+                        // close drawer when item is tapped
+                        mDrawerLayout.closeDrawers();
+
+                        // Add code here to update the UI based on the item selected
+                        // For example, swap UI fragments here
+                        int id = menuItem.getItemId();
+
+                        switch (id){
+                            case R.id.nav_account:
+                                Toast.makeText(getApplicationContext(),"Account",Toast.LENGTH_SHORT).show();
+                                Intent intent_Account = new Intent( Maps.this, AccountActivity.class);
+                                startActivity(intent_Account);
+                                mDrawerLayout.closeDrawers();
+                                break;
+                            case R.id.nav_Daily_Commute:
+                                Intent intent_DC = new Intent( Maps.this, Maps.class);
+                                startActivity(intent_DC);
+                                Toast.makeText(getApplicationContext(),"DailyCommute",Toast.LENGTH_SHORT).show();
+                                mDrawerLayout.closeDrawers();
+                                break;
+                            case R.id.nav_Find_Fellow_Traveller:
+                                Intent intent_FFT = new Intent( Maps.this, Maps.class);
+                                startActivity(intent_FFT);
+                                Toast.makeText(getApplicationContext(),"FindFellowTraveller",Toast.LENGTH_SHORT).show();
+                                mDrawerLayout.closeDrawers();
+                                break;
+                            case R.id.nav_Setting:
+                                Toast.makeText(getApplicationContext(),"Setting",Toast.LENGTH_SHORT).show();
+                                Intent intent_Setting = new Intent( Maps.this, AccountActivity.class);
+                                startActivity(intent_Setting);
+                                break;
+                            case R.id.nav_LogOut:
+                                Toast.makeText(getApplicationContext(),"LouOut",Toast.LENGTH_SHORT).show();
+                                finish();
+                        }
+
+
+                        return true;
+                    }
+                });
 
 
 
