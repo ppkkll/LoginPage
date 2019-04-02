@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-         loginBtn = findViewById(R.id.Login_loginButton);
+         loginBtn = (Button) findViewById(R.id.Login_loginButton);
 
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-         registerBtn = findViewById(R.id.Login_RegisterButton);
+         registerBtn = (Button) findViewById(R.id.Login_RegisterButton);
 
 
         registerBtn.setOnClickListener(new View.OnClickListener() {

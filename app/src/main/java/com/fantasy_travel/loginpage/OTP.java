@@ -31,7 +31,7 @@ public class OTP extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_input);
-        validate = findViewById(R.id.validate);
+        validate = (Button) findViewById(R.id.validate);
          preferences =
                 getSharedPreferences("com.myOTP.FantasyTravel", Context.MODE_PRIVATE);
 

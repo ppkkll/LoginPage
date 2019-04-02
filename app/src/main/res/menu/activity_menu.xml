@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_account"
+            android:icon="@mipmap/baseline_person_black_18dp"
+            android:title="My Account" />
+        <item
+            android:id="@+id/nav_Find_Fellow_Traveller"
+            android:icon="@mipmap/baseline_input_black_18dp"
+            android:title="Find Fellow Traveller" />
+        <item
+            android:id="@+id/nav_Daily_Commute"
+            android:icon="@mipmap/baseline_input_black_18dp"
+            android:title="Daily Commute" />
 
-    <item   android:id="@+id/nav_account"
-        android:icon="@mipmap/baseline_person_black_18dp"
-        android:title="My Account"/>
-    <item   android:id="@+id/nav_Find_Fellow_Traveller"
-        android:icon="@mipmap/baseline_input_black_18dp"
-        android:title="Find Fellow Traveller"/>
-    <item   android:id="@+id/nav_Daily_Commute"
-        android:icon="@mipmap/baseline_input_black_18dp"
-        android:title="Daily Commute"/>
-
-    <item   android:id="@+id/nav_Setting"
-        android:icon="@mipmap/baseline_settings_black_18dp"
-        android:title="My Setting"/>
-    <item   android:id="@+id/nav_LogOut"
-        android:icon="@mipmap/baseline_input_black_18dp"
-        android:title="Logout"/>
+        <item
+            android:id="@+id/nav_Setting"
+            android:icon="@mipmap/baseline_settings_black_18dp"
+            android:title="My Setting" />
+        <item
+            android:id="@+id/nav_LogOut"
+            android:icon="@mipmap/baseline_input_black_18dp"
+            android:title="Logout" />
+    </group>
 
 </menu>
