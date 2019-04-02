@@ -25,7 +25,7 @@ public class OTP extends AppCompatActivity {
     Button validate;
     int OTPStored=0;
     String emailID="";
-    String serverIP1="10.6.48.1";
+    String serverIP1="10.6.35.144";
     SharedPreferences preferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

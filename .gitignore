@@ -11,3 +11,4 @@
 /build
 /captures
 .externalNativeBuild
+app/lib/json-simple-1.1.jar
