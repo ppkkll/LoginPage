@@ -88,8 +88,6 @@
             android:label="My Plans"
             android:parentActivityName=".DailyCommuteViewPlan">
         </activity>
-
-            android:parentActivityName=".ResetPasswordActivity"></activity>
         <activity
             android:name=".P2PMainActivity"
             android:label="@string/app_name"
