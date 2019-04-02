@@ -33,7 +33,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyAj76-gXJ5gvXrjp12YlLA90xEokK7O234" />
 
         <activity
             android:name=".Maps"
@@ -76,6 +76,15 @@
             android:label="@string/app_name"
             android:parentActivityName=".ResetPasswordActivity">
         </activity>
+        <activity android:name=".DailyCommuteCreatePlan"
+            android:label="Create new Plan"
+            android:parentActivityName=".DailyCommuteCreatePlan">
+        </activity>
+        <activity android:name=".DailyCommuteViewPlan"
+            android:label="My Plans"
+            android:parentActivityName=".DailyCommuteViewPlan">
+        </activity>
+
     </application>
 
 </manifest>

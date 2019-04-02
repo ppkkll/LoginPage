@@ -55,13 +55,33 @@
 
 
             <Button
-                android:id="@+id/testButton"
+            android:id="@+id/testButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/buttonstyle"
+            android:text="@string/test"
+            android:textColor="@color/colorBackground" />
+
+            <Button
+                android:id="@+id/testButton1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/buttonstyle"
-                android:text="@string/test"
+                android:text="testing DC"
+                android:textColor="@color/colorBackground" />
+
+            <Button
+                android:id="@+id/testButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/buttonstyle"
+                android:text="Plans"
                 android:textColor="@color/colorBackground" />
         </LinearLayout>
     </android.support.v7.widget.LinearLayoutCompat>
