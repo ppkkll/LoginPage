@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#292b3d</color>
     <color name="colorBackground">#FFFFFF</color>
     <color name="greylight">#fafafa</color>
-    <color name="colorAccent">@android:color/white</color>
+    <color name="colorAccent">#CDDC39</color>
     <color name="colorsidebar_Header">#6480FF</color>
     <color name="startblue">#09c6df</color>
     <color name="endblue">#0bcce6</color>
@@ -13,4 +13,5 @@
     <color name="disable_foreground_grey">#42221f1f</color>
     <color name="disable_thumb_grey">#1c000000</color>
     <color name="enable_thumb_green">#46bdbf</color>
+
 </resources>

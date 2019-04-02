@@ -34,7 +34,7 @@ String serverIP="10.6.48.1";
         setContentView(R.layout.activity_register);
 
 
-         registerBtn = findViewById(R.id.signupSubmitBtn);
+         registerBtn = (Button) findViewById(R.id.signupSubmitBtn);
 
 
 

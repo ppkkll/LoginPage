@@ -2,6 +2,7 @@ package com.fantasy_travel.loginpage;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -12,12 +13,14 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -25,6 +28,10 @@ import android.widget.Toast;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
+import android.annotation.SuppressLint;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -75,12 +82,89 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
     private Switch mode, sex;
     private String mode_value, sex_value;
     public String server3="";
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mToggle;
     //public
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        mDrawerLayout = findViewById(R.id.Map_Drawer);
+
+        mDrawerLayout.addDrawerListener(
+                new DrawerLayout.DrawerListener() {
+                    @Override
+                    public void onDrawerSlide(View drawerView, float slideOffset) {
+                        // Respond when the drawer's position changes
+                    }
+
+                    @Override
+                    public void onDrawerOpened(View drawerView) {
+                        // Respond when the drawer is opened
+                    }
+
+                    @Override
+                    public void onDrawerClosed(View drawerView) {
+                        // Respond when the drawer is closed
+                    }
+
+                    @Override
+                    public void onDrawerStateChanged(int newState) {
+                        // Respond when the drawer motion state changes
+                    }
+                });
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(
+
+
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        // set item as selected to persist highlight
+                        menuItem.setChecked(true);
+                        // close drawer when item is tapped
+                        mDrawerLayout.closeDrawers();
+
+                        // Add code here to update the UI based on the item selected
+                        // For example, swap UI fragments here
+                        int id = menuItem.getItemId();
+
+                        switch (id){
+                            case R.id.nav_account:
+                                Toast.makeText(getApplicationContext(),"Account",Toast.LENGTH_SHORT).show();
+                                Intent intent_Account = new Intent( Maps.this, AccountActivity.class);
+                                startActivity(intent_Account);
+                                mDrawerLayout.closeDrawers();
+                                break;
+                            case R.id.nav_Daily_Commute:
+                                Intent intent_DC = new Intent( Maps.this, Maps.class);
+                                startActivity(intent_DC);
+                                Toast.makeText(getApplicationContext(),"DailyCommute",Toast.LENGTH_SHORT).show();
+                                mDrawerLayout.closeDrawers();
+                                break;
+                            case R.id.nav_Find_Fellow_Traveller:
+                                Intent intent_FFT = new Intent( Maps.this, Maps.class);
+                                startActivity(intent_FFT);
+                                Toast.makeText(getApplicationContext(),"FindFellowTraveller",Toast.LENGTH_SHORT).show();
+                                mDrawerLayout.closeDrawers();
+                                break;
+                            case R.id.nav_Setting:
+                                Toast.makeText(getApplicationContext(),"Setting",Toast.LENGTH_SHORT).show();
+                                Intent intent_Setting = new Intent( Maps.this, AccountActivity.class);
+                                startActivity(intent_Setting);
+                                break;
+                            case R.id.nav_LogOut:
+                                Toast.makeText(getApplicationContext(),"LouOut",Toast.LENGTH_SHORT).show();
+                                finish();
+                        }
+
+
+                        return true;
+                    }
+                });
+
+
 
         mode = (Switch) findViewById(R.id.switch1);
        sex = (Switch) findViewById(R.id.switch2);
@@ -94,6 +178,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
+
 
 
     public void onClick(View v)
@@ -143,8 +228,6 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
                                 destinationMarker = mMap.addMarker(userMarkerOptions);
                                 mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                                 mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
-
-
                             }
                         }
                         else
@@ -378,6 +461,17 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(mToggle.onOptionsItemSelected(item)){
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     class CallForDis extends AsyncTask {
 
