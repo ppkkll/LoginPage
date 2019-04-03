@@ -1,6 +1,5 @@
 package com.fantasy_travel.loginpage;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -54,22 +53,11 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Processing", Toast.LENGTH_SHORT).show();
                     }
                 });
-                  Log.d("Backend", "button pressed");
-                  //new Call().execute();
-                  Log.d("Backend", "call executed ");
+                Log.d("Backend", "button pressed");
+                //new Call().execute();
+                Log.d("Backend", "call executed ");
 
-                etUsername = (EditText) findViewById(R.id.loginID);
-                 userName = etUsername.getText().toString();
-                // Log.d()
-                etPassword = (EditText) findViewById(R.id.LoginPassword);
-                 password = etPassword.getText().toString();
-                SharedPreferences preferences =
-                        getSharedPreferences("com.myOTP.FantasyTravel", Context.MODE_PRIVATE);
-
-
-
-                preferences.edit().putString("emailID",userName).commit();
-               Intent intent = new Intent( LoginActivity.this, Maps.class);
+                Intent intent = new Intent(LoginActivity.this, Maps.class);
                 startActivity(intent);
                 //new Call().execute();
             }
@@ -102,8 +90,8 @@ public class LoginActivity extends AppCompatActivity {
             try {
 
 
-                String URL1 = Misc.Url + "/Login?emailID=" + userName + "&password=" + password;
-                Log.d("Backend",URL1);
+                String URL1 = Misc.Url + "Login?emailID=" + userName + "&password=" + password;
+                Log.d("Backend", URL1);
                 URL url = new URL(URL1);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
