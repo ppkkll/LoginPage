@@ -47,7 +47,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     Button btnOnOff, btnDiscover, btnSend, btnConnect;
-    ListView listView;
+    ListView listView,lv2;
     TextView read_msg_box, connectionStatus;
     EditText writeMsg;
     public OutputStream outputStream;
@@ -55,12 +55,14 @@ public class MainActivity extends AppCompatActivity {
     WifiP2pManager mManager;
     WifiP2pManager.Channel mChannel;
 
+
+
     BroadcastReceiver mReceiver;
     IntentFilter mIntentFilter;
 
     List<WifiP2pDevice> peers=new ArrayList<WifiP2pDevice>();
     String[] deviceNameArray;
-    WifiP2pDevice[] deviceArray;
+    WifiP2pDevice[] deviceArray, deviceArrays;
     WifiP2pDevice device;
     static final int MESSAGE_READ=1;
 
@@ -70,8 +72,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        lv2 = (ListView) findViewById(R.id.peerListView2);
+        listView = (ListView) findViewById(R.id.peerListView);
         initialWork();
         myListener();
     }
@@ -112,9 +118,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void startRegistration() {
+
         Map record = new HashMap();
         record.put("listenport", String.valueOf(8888));
-        record.put("buddy","Ani"+(int)(Math.random()*1000));
+        record.put("buddy","Traveller"+(int)(Math.random()*1000));
         record.put("available","visible");
 
         Log.d("Backend","inside startRegistration");
@@ -158,11 +165,11 @@ public class MainActivity extends AppCompatActivity {
                         .get(resourceType.deviceAddress) : resourceType.deviceName;
 
                 // show adapter
-
+               // deviceArrays=new WifiP2pDevice[buddies.values().size()];
                 ArrayAdapter<String> adapter=new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1);
                 adapter.add(String.valueOf(resourceType.deviceName));
                 adapter.notifyDataSetChanged();
-                listView.setAdapter(adapter);
+                lv2.setAdapter(adapter);
 
 
 
@@ -255,8 +262,8 @@ public class MainActivity extends AppCompatActivity {
                 WifiP2pConfig config=new WifiP2pConfig();
                 config.deviceAddress=device.deviceAddress;
 
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                intent.putExtra("NofD",deviceArray[i]);
+               // Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+               // intent.putExtra("NofD",deviceArray[i]);
 
                // i++;
               // mManager.createGroup(mChannel, new WifiP2pManager.ActionListener() {
@@ -273,6 +280,28 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"Not Connected",Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
+        });
+
+        lv2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                final WifiP2pDevice device=deviceArray[i];
+                WifiP2pConfig config=new WifiP2pConfig();
+                config.deviceAddress=device.deviceAddress;
+
+                mManager.connect(mChannel, config, new WifiP2pManager.ActionListener() {
+                    @Override
+                    public void onSuccess() {
+                        Toast.makeText(getApplicationContext(),"Connected: Group Formed",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(int i) {
+                        Toast.makeText(getApplicationContext(),"Connected to "+device.deviceName,Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
         });
 

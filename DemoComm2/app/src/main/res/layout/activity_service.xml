@@ -27,7 +27,6 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginTop="150dp"
                     android:background="@android:color/holo_green_dark" />
-
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -47,25 +46,6 @@
                     android:textColor="@android:color/holo_blue_dark"
                     android:textSize="18sp"
                     android:textStyle="italic" />
-
-                <ListView
-                    android:id="@+id/peerListView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:layout_below="@+id/peerListView"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="410dp"
-                    android:background="@android:color/holo_green_dark" />
-
-                <ListView
-                    android:id="@+id/peerListView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:layout_below="@+id/peerListView"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="410dp"
-                    android:background="@android:color/holo_green_dark" />
-
             </LinearLayout>
 
             <RelativeLayout
@@ -99,13 +79,25 @@
                     android:layout_centerHorizontal="true"
                     android:text="discover" />
 
-
-
             </RelativeLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="400dp"
+                android:gravity="center_horizontal"
+                android:layout_centerHorizontal="true">
 
+                <ListView
+                    android:id="@+id/peerListView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_below="@+id/peerListView"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="150dp"
+                    android:background="@android:color/holo_green_dark" />
 
-
+            </LinearLayout>
         </RelativeLayout>
 
     </LinearLayout>
