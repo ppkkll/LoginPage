@@ -11,13 +11,15 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
@@ -25,16 +27,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.*;
-import android.annotation.SuppressLint;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -48,6 +44,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.PolyUtil;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -55,7 +55,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -138,7 +137,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
                                 mDrawerLayout.closeDrawers();
                                 break;
                             case R.id.nav_Daily_Commute:
-                                Intent intent_DC = new Intent( Maps.this, Maps.class);
+                                Intent intent_DC = new Intent( Maps.this, DailyCommuteCreatePlan.class);
                                 startActivity(intent_DC);
                                 Toast.makeText(getApplicationContext(),"DailyCommute",Toast.LENGTH_SHORT).show();
                                 mDrawerLayout.closeDrawers();
@@ -482,7 +481,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
 
             try
             {
-                String URL1="https://maps.googleapis.com/maps/api/directions/json?origin="+start_latitude+","+start_longitude+"&destination="+dest_latitude+","+dest_longitude+"&mode="+mode_value+"&key=AIzaSyAj76-gXJ5gvXrjp12YlLA90xEokK7O234";
+                String URL1="https://maps.googleapis.com/maps/api/directions/json?origin="+start_latitude+","+start_longitude+"&destination="+dest_latitude+","+dest_longitude+"&waypoints="+53.3418354+","+-6.2529479+"&mode="+mode_value+"&key=AIzaSyAj76-gXJ5gvXrjp12YlLA90xEokK7O234";
 
                 URL url = new URL(URL1);
                 HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
@@ -642,7 +641,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
         String output1="";
         @Override
         protected Object doInBackground(Object[] objects) {
-int count=0;
+            int count=0;
             try {
                 SharedPreferences preferences =
                         getSharedPreferences("com.myOTP.FantasyTravel", Context.MODE_PRIVATE);
@@ -685,7 +684,7 @@ int count=0;
                                 Object obj;
 
                                 try{
-                                       obj = new JSONParser().parse(output1);
+                                    obj = new JSONParser().parse(output1);
                                     JSONObject jo = (JSONObject) obj;
                                     String id=(String)jo.get("id");
                                     String responseCode=(String)jo.get("responseCode");
