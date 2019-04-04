@@ -652,11 +652,11 @@ int count=0;
                 emailID=     preferences.getString("emailID",emailID);
                // String URL1="http://load1-467103352.eu-west-1.elb.amazonaws.com:8083/checkForGroup?id="+emailID;
                 String URL1="http://10.6.46.216:5000/checkForGroupWithCondition?id=aditi.d@gmail.com";
-
+                Log.d("Backend","CallForFindTraveller");
                 Log.d("Backend",URL1);
 
                 URL url = new URL(URL1);
-                while (true) {
+
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");
                     // conn.setRequestProperty("Accept", "application/json");
@@ -694,6 +694,11 @@ int count=0;
 
                                     Iterator itr2 = ja.iterator();
                                     int i=1;
+                                    Maps.this.runOnUiThread(new Runnable() {
+                                        public void run() {
+                                            mMap.clear();     }
+                                    });
+
                                     while (itr2.hasNext())
                                     {
                                         //   Iterator itr1 = ( (HashMap) itr2.next()).entrySet().iterator();
@@ -706,6 +711,7 @@ int count=0;
                                         Log.d("Backend"," User "+i+" userId " + userId+" startLatitude "+startLatitude+" startLongitude "+startLongitude+" endLatitude "+endLatitude+" endLongitude "+endLongitude);
                                         Maps.this.runOnUiThread(new Runnable() {
                                             public void run() {
+
                                                 MarkerOptions markerOptions = new MarkerOptions();
                                                 markerOptions.position(new LatLng(startLatitude, startLongitude));
                                                 mMap.addMarker(markerOptions);
@@ -734,13 +740,8 @@ i++;
                     }
                     conn.disconnect();
                     Log.d("Backend", "Thread sleeping");
-                    Thread.sleep(10000);
 
 
-                    if(count==10){
-                        return null;
-                    }
-                }
 
 
             } catch (Exception e) {
@@ -769,11 +770,11 @@ i++;
                 emailID=     preferences.getString("emailID",emailID);
                 // String URL1="http://load1-467103352.eu-west-1.elb.amazonaws.com:8083/checkForGroup?id="+emailID;
                 String URL1="http://10.6.46.216:5000/checkForUsers?id=aditi.d@gmail.com";
-
+                Log.d("Backend","CallForFindTraveller1");
                 Log.d("Backend",URL1);
 
                 URL url = new URL(URL1);
-                while (true) {
+
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");
                     // conn.setRequestProperty("Accept", "application/json");
@@ -794,7 +795,7 @@ i++;
                         output1=output1+output;
 
                     }
-                    if(output1.contains("Successfull"))
+                    if(output1.contains("Similar User"))
                     {
                         Maps.this.runOnUiThread(new Runnable() {
                             public void run() {
@@ -851,13 +852,8 @@ i++;
                     }
                     conn.disconnect();
                     Log.d("Backend", "Thread sleeping");
-                    Thread.sleep(10000);
 
 
-                    if(count==10){
-                        return null;
-                    }
-                }
 
 
             } catch (Exception e) {
