@@ -1,7 +1,9 @@
 package com.fantasy_travel.loginpage;
 
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -52,7 +54,7 @@ public class DailyCommuteCreatePlan extends AppCompatActivity {
     String start_loc_name, dest_loc_name, time, mode, sex;
     public String start[], dest[];
     private String apiKey = "AIzaSyAj76-gXJ5gvXrjp12YlLA90xEokK7O234";
-
+    private String username = "";
 
 
     @Override
@@ -63,6 +65,10 @@ public class DailyCommuteCreatePlan extends AppCompatActivity {
         Places.initialize(getApplicationContext(), apiKey);
         PlacesClient placesClient = Places.createClient(this);
 
+        SharedPreferences preferences1 =
+                getSharedPreferences("com.myOTP.FantasyTravel", Context.MODE_PRIVATE);
+        username = preferences1.getString("emailID",username);
+
         if(!Places.isInitialized())
         {
             Places.initialize(getApplicationContext(), "AIzaSyAj76-gXJ5gvXrjp12YlLA90xEokK7O234");
@@ -71,6 +77,7 @@ public class DailyCommuteCreatePlan extends AppCompatActivity {
         planName = (EditText) findViewById(R.id.Plan_Name);
         plan_name1 = planName.getText().toString();
         Log.d("Backend","planName"+plan_name1);
+
         final TextView startingTextView = findViewById(R.id.starting_location_autocomplete_text);
         final TextView destinationTextView = findViewById(R.id.destination_location_autocomplete_text);
 
@@ -179,10 +186,10 @@ public class DailyCommuteCreatePlan extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(DailyCommuteCreatePlan.this, "Plan : " + plan_name1 +"is Saved.",Toast.LENGTH_SHORT).show();
+                Toast.makeText(DailyCommuteCreatePlan.this, "Plan : " + planName.getText().toString() +"is Saved.",Toast.LENGTH_SHORT).show();
                 new Call_Save().execute();
 
-                Intent intent = new Intent(DailyCommuteCreatePlan.this, DailyCommuteViewPlan.class);
+                Intent intent = new Intent(DailyCommuteCreatePlan.this, DailyCommuteMapActivity.class);
                 startActivity(intent);
             }
         });
@@ -199,9 +206,6 @@ public class DailyCommuteCreatePlan extends AppCompatActivity {
 private class CustomOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
 
             public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
-                Toast.makeText(parent.getContext(),
-                        "OnItemSelectedListener : " + parent.getItemAtPosition(pos).toString(),
-                        Toast.LENGTH_SHORT).show();
                 mode = spinner1.getSelectedItem().toString();
                 sex = spinner2.getSelectedItem().toString();
             }
@@ -219,7 +223,7 @@ private class CustomOnItemSelectedListener implements AdapterView.OnItemSelected
             Log.d("Backend", "insideCall");
             try {
 
-                String URL1 = "http://10.6.33.190:8080/InsertMyPlan?startLat="+start[0]+"&endLat="+start[1]+"&endLong="+dest[1]+"&startLong="+dest[0]+"&id=qq@gmail.com&preferedSex="+sex+"&preferedMode="+mode+"&name=daily1&startLoc="+start_loc_name+"&endLoc="+dest_loc_name+"&time="+time;
+                String URL1 = "http://10.6.46.216:8080/InsertMyPlan?startLat="+start[0]+"&endLat="+start[1]+"&endLong="+dest[1]+"&startLong="+dest[0]+"&id="+username+"&preferedSex="+sex+"&preferedMode="+mode+"&name="+planName.getText().toString()+"&startLoc="+start_loc_name+"&endLoc="+dest_loc_name+"&time="+time;
                 Log.d("Backend",URL1);
                 URL url = new URL(URL1);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
