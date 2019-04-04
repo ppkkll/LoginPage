@@ -307,6 +307,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
                         polylineOptions1.color(Color.RED);
                     }
                     mMap.addPolyline(polylineOptions1);
+                    new CallForFindTraveller1().execute();
                 }
                 else
                 {
@@ -317,7 +318,8 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
 
             case R.id.Search_button1 :
 
-                new CallForSettingLocation().execute();
+              //  new CallForSettingLocation().execute();
+                new CallForFindTraveller().execute();
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
@@ -649,7 +651,7 @@ int count=0;
                 String    emailID=  "";
                 emailID=     preferences.getString("emailID",emailID);
                // String URL1="http://load1-467103352.eu-west-1.elb.amazonaws.com:8083/checkForGroup?id="+emailID;
-                String URL1="http://load1-467103352.eu-west-1.elb.amazonaws.com:8083/checkForGroup?id="+emailID;
+                String URL1="http://10.6.46.216:5000/checkForGroupWithCondition?id=aditi.d@gmail.com";
 
                 Log.d("Backend",URL1);
 
@@ -753,6 +755,123 @@ i++;
         }
     }
 
+    class CallForFindTraveller1 extends AsyncTask {
+        String output1="";
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            int count=0;
+            try {
+                SharedPreferences preferences =
+                        getSharedPreferences("com.myOTP.FantasyTravel", Context.MODE_PRIVATE);
 
+
+                String    emailID=  "";
+                emailID=     preferences.getString("emailID",emailID);
+                // String URL1="http://load1-467103352.eu-west-1.elb.amazonaws.com:8083/checkForGroup?id="+emailID;
+                String URL1="http://10.6.46.216:5000/checkForUsers?id=aditi.d@gmail.com";
+
+                Log.d("Backend",URL1);
+
+                URL url = new URL(URL1);
+                while (true) {
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("POST");
+                    // conn.setRequestProperty("Accept", "application/json");
+                    Log.d("Backend", "request posted successfully");
+                    if (conn.getResponseCode() != 200) {
+                        throw new RuntimeException("Failed : HTTP error code : "
+                                + conn.getResponseCode());
+                    }
+
+                    BufferedReader br = new BufferedReader(new InputStreamReader(
+                            (conn.getInputStream())));
+
+                    String output;
+
+                    //  Log.d("Output from Server .... \n","new");
+                    while ((output = br.readLine()) != null) {
+                        Log.d("Backend", output);
+                        output1=output1+output;
+
+                    }
+                    if(output1.contains("Successfull"))
+                    {
+                        Maps.this.runOnUiThread(new Runnable() {
+                            public void run() {
+                                Toast.makeText(Maps.this, "user Present", Toast.LENGTH_SHORT).show();
+                                Object obj;
+
+                                try{
+                                    obj = new JSONParser().parse(output1);
+                                    JSONObject jo = (JSONObject) obj;
+                                    String id=(String)jo.get("id");
+                                    String responseCode=(String)jo.get("responseCode");
+                                    String responseMessage=(String)jo.get("responseMessage");
+                                    JSONArray ja = (JSONArray) jo.get("resultSimilarUsers");
+
+                                    Iterator itr2 = ja.iterator();
+                                    int i=1;
+                                    while (itr2.hasNext())
+                                    {
+                                        //   Iterator itr1 = ( (HashMap) itr2.next()).entrySet().iterator();
+                                        JSONObject jo1 = (JSONObject) itr2.next();
+                                        String userId=(String)jo1.get("id");
+                                        startLongitude=(Double)jo1.get("startLongitude");
+                                        startLatitude=(Double)jo1.get("startLatitude");
+                                        endLongitude=(Double)jo1.get("endLongitude");
+                                        endLatitude=(Double)jo1.get("endLatitude");
+                                        Log.d("Backend"," User "+i+" userId " + userId+" startLatitude "+startLatitude+" startLongitude "+startLongitude+" endLatitude "+endLatitude+" endLongitude "+endLongitude);
+                                        Maps.this.runOnUiThread(new Runnable() {
+                                            public void run() {
+                                                MarkerOptions markerOptions = new MarkerOptions();
+                                                markerOptions.position(new LatLng(startLatitude, startLongitude));
+                                                mMap.addMarker(markerOptions);
+                                                mMap.animateCamera(CameraUpdateFactory.zoomBy(14));
+                                            }
+                                        });
+                                        i++;
+                                    }
+                                }
+                                catch(Exception e)
+                                {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                    }
+                    else
+                    {
+                        Maps.this.runOnUiThread(new Runnable() {
+                            public void run() {
+                                Toast.makeText(Maps.this, "user Not Present", Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+                        count++;
+                    }
+                    conn.disconnect();
+                    Log.d("Backend", "Thread sleeping");
+                    Thread.sleep(10000);
+
+
+                    if(count==10){
+                        return null;
+                    }
+                }
+
+
+            } catch (Exception e) {
+
+
+                Log.d("Backend", "exception in HTTP");
+                e.printStackTrace();
+
+            }
+
+            return null;
+        }
     }
+
+
+}
 
