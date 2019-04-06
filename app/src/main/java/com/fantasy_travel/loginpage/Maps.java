@@ -620,7 +620,127 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
                 String    emailID=  "";
                 emailID=     preferences.getString("emailID",emailID);
                 // String URL1="http://load1-467103352.eu-west-1.elb.amazonaws.com:8080/InsertLocData?id="+emailID+"&startLong="+start_longitude+"&endLong="+dest_longitude+"&startLat="+start_latitude+"&endLat="+dest_latitude;
-                String URL1=Misc.Url3+"/InsertLocData?id="+emailID+"&startLong="+start_longitude+"&endLong="+dest_longitude+"&startLat="+start_latitude+"&endLat="+dest_latitude+"&preferedMode="+mode_value+"&preferedSex="+sex_value;
+                String URL1=Misc.Url1+"/InsertLocData?id="+emailID+"&startLong="+start_longitude+"&endLong="+dest_longitude+"&startLat="+start_latitude+"&endLat="+dest_latitude+"&preferedMode="+mode_value+"&preferedSex="+sex_value;
+
+                Log.d("Backend",URL1);
+                URL url = new URL(URL1);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                // conn.setRequestProperty("Accept", "application/json");
+                Log.d("Backend", "request posted successfully");
+                if (conn.getResponseCode() != 200) {
+                    throw new RuntimeException("Failed : HTTP error code : "
+                            + conn.getResponseCode());
+
+                }
+                else
+                {
+                    new CallForFindTraveller1().execute();
+                }
+                BufferedReader br = new BufferedReader(new InputStreamReader(
+                        (conn.getInputStream())));
+
+                String output;
+                //  Log.d("Output from Server .... \n","new");
+                while ((output = br.readLine()) != null) {
+                    Log.d("Backend", output);
+
+                }
+
+
+                conn.disconnect();
+
+            } catch (Exception e) {
+
+
+                Log.d("Backend", "exception in HTTP");
+                e.printStackTrace();
+
+            }
+
+            return null;
+        }
+    }
+
+    class CallForUserPresent extends AsyncTask {
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+
+            try {
+                SharedPreferences preferences =
+                        getSharedPreferences("com.myOTP.FantasyTravel", Context.MODE_PRIVATE);
+
+
+                String    emailID=  "";
+                emailID=     preferences.getString("emailID",emailID);
+                // String URL1="http://load1-467103352.eu-west-1.elb.amazonaws.com:8080/InsertLocData?id="+emailID+"&startLong="+start_longitude+"&endLong="+dest_longitude+"&startLat="+start_latitude+"&endLat="+dest_latitude;
+                String URL1=Misc.Url1+"/FindPresent?id="+emailID;
+                Log.d("Backend",URL1);
+                URL url = new URL(URL1);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                // conn.setRequestProperty("Accept", "application/json");
+                Log.d("Backend", "request posted successfully");
+                if (conn.getResponseCode() != 200) {
+                    throw new RuntimeException("Failed : HTTP error code : "
+                            + conn.getResponseCode());
+
+                }
+                else
+                {
+                    new CallForFindTraveller1().execute();
+                }
+                BufferedReader br = new BufferedReader(new InputStreamReader(
+                        (conn.getInputStream())));
+
+                String output;
+                String output1="";
+                //  Log.d("Output from Server .... \n","new");
+                while ((output = br.readLine()) != null) {
+                    Log.d("Backend", output);
+                    output1=output1+output;
+
+                }
+                if(output1.contains("200")) {
+                    Log.d("Backend", "Userpresent calling CallForSettingLocation1");
+                    new CallForSettingLocation1().execute();
+                }
+                else
+                { Log.d("Backend", "User not present calling CallForSettingLocation");
+                    new CallForSettingLocation().execute();
+                }
+
+                conn.disconnect();
+
+            } catch (Exception e) {
+
+
+                Log.d("Backend", "exception in HTTP");
+                e.printStackTrace();
+
+            }
+
+            return null;
+        }
+    }
+
+
+
+    class CallForSettingLocation1 extends AsyncTask {
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+
+            try {
+                SharedPreferences preferences =
+                        getSharedPreferences("com.myOTP.FantasyTravel", Context.MODE_PRIVATE);
+
+
+                String    emailID=  "";
+                emailID=     preferences.getString("emailID",emailID);
+                // String URL1="http://load1-467103352.eu-west-1.elb.amazonaws.com:8080/InsertLocData?id="+emailID+"&startLong="+start_longitude+"&endLong="+dest_longitude+"&startLat="+start_latitude+"&endLat="+dest_latitude;
+                String URL1=Misc.Url1+"/UpdateLocData?id="+emailID+"&startLong="+start_longitude+"&endLong="+dest_longitude+"&startLat="+start_latitude+"&endLat="+dest_latitude+"&preferedMode="+mode_value+"&preferedSex="+sex_value;
 
                 Log.d("Backend",URL1);
                 URL url = new URL(URL1);
