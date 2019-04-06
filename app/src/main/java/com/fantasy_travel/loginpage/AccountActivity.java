@@ -66,7 +66,7 @@ public class AccountActivity extends AppCompatActivity{
 
 
                 emailID = preferences.getString("emailID", emailID);
-                String URL1 = Misc.Url + "/UpdateRating?emailID=" + emailID + "&Rating=";
+                String URL1 = Misc.Url1 + "/UpdateRating?emailID=" + emailID + "&Rating=";
 
                 URL url = new URL(URL1);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();

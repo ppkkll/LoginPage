@@ -18,7 +18,7 @@ import java.net.URL;
 import java.util.Set;
 
 public class SettlementActivity extends AppCompatActivity {
-    TextView username = (TextView) findViewById(R.id.loginID);
+    TextView username;
     Button button_submit;
     TextView text;
     RatingBar Rating_bar;
@@ -27,15 +27,19 @@ public class SettlementActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rating);
         linstenerForRatingBar();
+        button_submit=(Button) findViewById(R.id.buttonRating);
         button_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new Call().execute();
+                Intent intent = new Intent(SettlementActivity.this, Maps.class);
+                startActivity(intent);
             }
         });
     }
 
     public void linstenerForRatingBar(){
+         username = (TextView) findViewById(R.id.loginID);
         Rating_bar = (RatingBar) findViewById(R.id.ratingBar);
         text = (TextView) findViewById(R.id.RatingTextView);
         Rating_bar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -53,7 +57,7 @@ public class SettlementActivity extends AppCompatActivity {
             Log.d("Backend", "insideCall");
             try {
 
-                String URL1 = Misc.Url + "UpdateRating?emailID=" + username + "rating=" + text;
+                String URL1 = Misc.Url1 + "UpdateRating?emailID=" + "qq" + "rating=" + text;
                 Log.d("Backend", URL1);
                 URL url = new URL(URL1);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();

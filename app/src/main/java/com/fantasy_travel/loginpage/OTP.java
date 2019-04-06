@@ -91,7 +91,7 @@ public class OTP extends AppCompatActivity {
 
 
                 emailID=     preferences.getString("emailID",emailID);
-                String URL1=Misc.Url+"/UpdateStatus?emailID="+emailID;
+                String URL1=Misc.Url2+"/UpdateStatus?emailID="+emailID;
 
                 URL url = new URL(URL1);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();

@@ -223,7 +223,7 @@ private class CustomOnItemSelectedListener implements AdapterView.OnItemSelected
             Log.d("Backend", "insideCall");
             try {
 
-                String URL1 = "http://10.6.46.216:8080/InsertMyPlan?startLat="+start[0]+"&endLat="+start[1]+"&endLong="+dest[1]+"&startLong="+dest[0]+"&id="+username+"&preferedSex="+sex+"&preferedMode="+mode+"&name="+planName.getText().toString()+"&startLoc="+start_loc_name+"&endLoc="+dest_loc_name+"&time="+time;
+                String URL1 = Misc.Url1+"/InsertMyPlan?startLat="+start[0]+"&endLat="+start[1]+"&endLong="+dest[1]+"&startLong="+dest[0]+"&id="+username+"&preferedSex="+sex+"&preferedMode="+mode+"&name="+planName.getText().toString()+"&startLoc="+start_loc_name+"&endLoc="+dest_loc_name+"&time="+time;
                 Log.d("Backend",URL1);
                 URL url = new URL(URL1);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();

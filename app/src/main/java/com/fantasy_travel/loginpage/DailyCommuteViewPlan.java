@@ -16,13 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -156,7 +150,7 @@ public class DailyCommuteViewPlan extends AppCompatActivity {
                         getSharedPreferences("com.myOTP.FantasyTravel", Context.MODE_PRIVATE);
                 username = preferences1.getString("emailID",username);
                 Log.d("Backend", "username"+username);
-                String URL1 = "http://10.6.46.216:8080/FindMyPlan?id="+username;
+                String URL1 = Misc.Url1+"/FindMyPlan?id="+username;
                 Log.d("Backend", "request URL"+URL1);
 
                 URL url = new URL(URL1);

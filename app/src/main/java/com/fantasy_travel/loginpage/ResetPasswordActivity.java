@@ -74,7 +74,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
 
                 emailID=     preferences.getString("emailID",emailID);
-                String URL1=Misc.Url+ "/Updatepassword?emailID="+emailID;
+                String URL1=Misc.Url1+ "/Updatepassword?emailID="+emailID;
 
                 URL url = new URL(URL1);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();

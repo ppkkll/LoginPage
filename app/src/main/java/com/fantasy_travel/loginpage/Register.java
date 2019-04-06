@@ -172,7 +172,7 @@ String serverIP="10.6.48.1";
 
             try {
 
-                String URL1="http://"+serverIP1+":8080/otpGenerate?phoneNumber="+phoneNumber;
+                String URL1=Misc.Url1+"/otpGenerate?phoneNumber="+phoneNumber;
                 URL url = new URL(URL1);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");

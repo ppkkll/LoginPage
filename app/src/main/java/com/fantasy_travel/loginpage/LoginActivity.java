@@ -57,9 +57,9 @@ public class LoginActivity extends AppCompatActivity {
                 //new Call().execute();
                 Log.d("Backend", "call executed ");
 
-                Intent intent = new Intent(LoginActivity.this, Maps.class);
-                startActivity(intent);
-                //new Call().execute();
+               // Intent intent = new Intent(LoginActivity.this, Maps.class);
+                //startActivity(intent);
+                new Call().execute();
             }
         });
 
@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
             try {
 
 
-                String URL1 = Misc.Url + "Login?emailID=" + userName + "&password=" + password;
+                String URL1 = Misc.Url1 + "Login?emailID=" + userName + "&password=" + password;
                 Log.d("Backend", URL1);
                 URL url = new URL(URL1);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();

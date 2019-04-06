@@ -24,6 +24,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -82,6 +83,8 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
     private String mode_value, sex_value;
     public String server3="";
     private DrawerLayout mDrawerLayout;
+    Button  find123, search123;
+
     private ActionBarDrawerToggle mToggle;
     //public
     @Override
@@ -164,10 +167,12 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
                 });
 
 
-
+        find123 = (Button) findViewById(R.id.Search_button);
+        search123 = (Button) findViewById(R.id.Search_button1);
         mode = (Switch) findViewById(R.id.switch1);
-       sex = (Switch) findViewById(R.id.switch2);
-
+        sex = (Switch) findViewById(R.id.switch2);
+        Log.d("Backend","find123.getText().toString()"+find123.getText().toString());
+        Log.d("Backend","search123.getText().toString()"+search123.getText().toString());
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
         {
             checkUserLocationPermission();
@@ -198,6 +203,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
 
                 List<Address> addressList = null;
                 MarkerOptions userMarkerOptions = new MarkerOptions();*/
+
                 if(!TextUtils.isEmpty(address))
                 {
                     Geocoder geocoder = new Geocoder(this);
@@ -247,7 +253,9 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
 
 
             case R.id.Search_button :
-                //Toast.makeText(this,"No functionality currently !!!",Toast.LENGTH_SHORT).show();
+                Log.d("Backend","find123.getText().toString()"+find123.getText().toString());
+                if(find123.getText().toString().contains("Find")){
+                    //Toast.makeText(this,"No functionality currently !!!",Toast.LENGTH_SHORT).show();
                /* dataTransfer = new Object[3];
                 String url = getDirectionsUrl();
                 GetDirectionsData getDirectionsData = new GetDirectionsData();
@@ -256,75 +264,94 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
                 dataTransfer[2] = new LatLng(dest_latitude, dest_longitude);
                 getDirectionsData.execute(dataTransfer); */
 
-                if(!TextUtils.isEmpty(address))
-                {
-                    sex_value=sex.getTextOn().toString();
-                    if (mode.isChecked())
+                    if(!TextUtils.isEmpty(address))
                     {
-                        mode_value = mode.getTextOn().toString();
-                        Log.d("backend", "mode :"+mode_value);
+                        sex_value=sex.getTextOn().toString();
+                        if (mode.isChecked())
+                        {
+                            mode_value = mode.getTextOn().toString();
+                            Log.d("backend", "mode :"+mode_value);
+                        }
+                        else
+                        {
+                            mode_value = mode.getTextOff().toString();
+                            Log.d("backend", "mode :"+mode_value);
+                        }
+                        polylineOptions1=null;
+                        new CallForDis().execute();
+                        Toast.makeText(this, "processing !!!", Toast.LENGTH_SHORT).show();
+                        try {
+
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        mMap.clear();
+                        MarkerOptions markerOptions = new MarkerOptions();
+                        markerOptions.position(new LatLng(dest_latitude, dest_longitude));
+                        //markerOptions.draggable(true);
+                        // float results[] = new float[10];
+
+                        SharedPreferences preferences =
+                                getSharedPreferences("com.myOTP.FantasyTravel", Context.MODE_PRIVATE);
+                        String duration1= "";
+                        duration1=      preferences.getString("duration",duration1);
+                        String distance1="";
+                        distance1=  preferences.getString("distance",distance1);
+                        Log.d("backend", "duration23 :"+duration1);
+                        Log.d("backend", "distance23 :"+distance1);
+                        String s1= "Duration="+String.valueOf(duration1);
+                        String s2= "Distance="+String.valueOf(distance1);
+                        Log.d("backend", "duration :"+s1);
+                        Log.d("backend", "distance :"+s2);
+                        markerOptions.title(s1);
+                        markerOptions.snippet(s2);
+                        mMap.addMarker(markerOptions);
+                        while (polylineOptions1==null)
+                        {  try {
+
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        }
+                        if(mode_value.equals("walking")){
+                            polylineOptions1.color(Color.BLUE);
+                        }
+                        else{
+                            polylineOptions1.color(Color.RED);
+                        }
+                        mMap.addPolyline(polylineOptions1);
+                        new CallForSettingLocation().execute();
+
                     }
                     else
                     {
-                        mode_value = mode.getTextOff().toString();
-                        Log.d("backend", "mode :"+mode_value);
+                        Toast.makeText(this,"No destination entered !!!",Toast.LENGTH_SHORT).show();
                     }
 
-                    new CallForDis().execute();
-                    Toast.makeText(this, "processing !!!", Toast.LENGTH_SHORT).show();
-                    try {
-
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    mMap.clear();
-                    MarkerOptions markerOptions = new MarkerOptions();
-                    markerOptions.position(new LatLng(dest_latitude, dest_longitude));
-                    //markerOptions.draggable(true);
-                    // float results[] = new float[10];
-
-                    SharedPreferences preferences =
-                            getSharedPreferences("com.myOTP.FantasyTravel", Context.MODE_PRIVATE);
-                    String duration1= "";
-                    duration1=      preferences.getString("duration",duration1);
-                    String distance1="";
-                    distance1=  preferences.getString("distance",distance1);
-                    Log.d("backend", "duration23 :"+duration1);
-                    Log.d("backend", "distance23 :"+distance1);
-                    String s1= "Duration="+String.valueOf(duration1);
-                    String s2= "Distance="+String.valueOf(distance1);
-                    Log.d("backend", "duration :"+s1);
-                    Log.d("backend", "distance :"+s2);
-                    markerOptions.title(s1);
-                    markerOptions.snippet(s2);
-                    mMap.addMarker(markerOptions);
-                    if(mode_value.equals("walking")){
-                        polylineOptions1.color(Color.BLUE);
-                    }
-                    else{
-                        polylineOptions1.color(Color.RED);
-                    }
-                    mMap.addPolyline(polylineOptions1);
-                    new CallForFindTraveller1().execute();
                 }
                 else
                 {
-                    Toast.makeText(this,"No destination entered !!!",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Maps.this, SettlementActivity.class);
+                    startActivity(intent);
                 }
                 break;
 
 
             case R.id.Search_button1 :
-
-              //  new CallForSettingLocation().execute();
-                new CallForFindTraveller().execute();
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                if(search123.getText().toString().contains("Search")) {
+                    //
+                   // new CallForFindTraveller().execute();
+                    find123.setText("Leave Journey");
+                    search123.setText("End Journey");
                 }
 
+                else{
+                    Intent intent = new Intent(Maps.this, SettlementActivity.class);
+                    startActivity(intent);
+                }
 
         }
     }
@@ -402,7 +429,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
     protected synchronized void buildGoogleApiClient()
     {
         googleApiClient = new GoogleApiClient.Builder(this)
-        .addConnectionCallbacks(this).addOnConnectionFailedListener(this)
+                .addConnectionCallbacks(this).addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API).build();
 
         googleApiClient.connect();
@@ -481,7 +508,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
 
             try
             {
-                String URL1="https://maps.googleapis.com/maps/api/directions/json?origin="+start_latitude+","+start_longitude+"&destination="+dest_latitude+","+dest_longitude+"&waypoints="+53.3418354+","+-6.2529479+"&mode="+mode_value+"&key=AIzaSyAj76-gXJ5gvXrjp12YlLA90xEokK7O234";
+                String URL1="https://maps.googleapis.com/maps/api/directions/json?origin="+start_latitude+","+start_longitude+"&destination="+dest_latitude+","+dest_longitude+"&mode="+mode_value+"&key=AIzaSyAj76-gXJ5gvXrjp12YlLA90xEokK7O234";
 
                 URL url = new URL(URL1);
                 HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
@@ -501,7 +528,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
                 //  Log.d("Output from Server .... \n","new");
                 while ((output = br.readLine()) != null) {
                     Log.d("Backend", "output"+output);
-                   out=out+output;
+                    out=out+output;
                 }
 
                 Log.d("Backend", "out"+out);
@@ -578,7 +605,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
             markerOptions.title("Duration : "+duration);
             markerOptions.snippet("Distance : "+distance);
             mMap1.addMarker(markerOptions);*/
-        }
+    }
 
     class CallForSettingLocation extends AsyncTask {
 
@@ -592,8 +619,8 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
 
                 String    emailID=  "";
                 emailID=     preferences.getString("emailID",emailID);
-               // String URL1="http://load1-467103352.eu-west-1.elb.amazonaws.com:8080/InsertLocData?id="+emailID+"&startLong="+start_longitude+"&endLong="+dest_longitude+"&startLat="+start_latitude+"&endLat="+dest_latitude;
-                String URL1="http://load1-467103352.eu-west-1.elb.amazonaws.com:8080/InsertLocData?id="+emailID+"&startLong="+start_longitude+"&endLong="+dest_longitude+"&startLat="+start_latitude+"&endLat="+dest_latitude+"&preferedMode="+mode_value+"&preferedSex="+sex_value;
+                // String URL1="http://load1-467103352.eu-west-1.elb.amazonaws.com:8080/InsertLocData?id="+emailID+"&startLong="+start_longitude+"&endLong="+dest_longitude+"&startLat="+start_latitude+"&endLat="+dest_latitude;
+                String URL1=Misc.Url3+"/InsertLocData?id="+emailID+"&startLong="+start_longitude+"&endLong="+dest_longitude+"&startLat="+start_latitude+"&endLat="+dest_latitude+"&preferedMode="+mode_value+"&preferedSex="+sex_value;
 
                 Log.d("Backend",URL1);
                 URL url = new URL(URL1);
@@ -608,7 +635,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
                 }
                 else
                 {
-                    new CallForFindTraveller().execute();
+                    new CallForFindTraveller1().execute();
                 }
                 BufferedReader br = new BufferedReader(new InputStreamReader(
                         (conn.getInputStream())));
@@ -635,7 +662,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
         }
     }
 
-
+    String s1[];
 
     class CallForFindTraveller extends AsyncTask {
         String output1="";
@@ -649,96 +676,101 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
 
                 String    emailID=  "";
                 emailID=     preferences.getString("emailID",emailID);
-               // String URL1="http://load1-467103352.eu-west-1.elb.amazonaws.com:8083/checkForGroup?id="+emailID;
-                String URL1="http://10.6.46.216:5000/checkForGroupWithCondition?id=aditi.d@gmail.com";
+                // String URL1="http://load1-467103352.eu-west-1.elb.amazonaws.com:8083/checkForGroup?id="+emailID;
+                String URL1=Misc.Url3+"/checkForGroupWithCondition?id="+emailID;
                 Log.d("Backend","CallForFindTraveller");
                 Log.d("Backend",URL1);
 
                 URL url = new URL(URL1);
 
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("POST");
-                    // conn.setRequestProperty("Accept", "application/json");
-                    Log.d("Backend", "request posted successfully");
-                    if (conn.getResponseCode() != 200) {
-                        throw new RuntimeException("Failed : HTTP error code : "
-                                + conn.getResponseCode());
-                    }
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                // conn.setRequestProperty("Accept", "application/json");
+                Log.d("Backend", "request posted successfully");
+                if (conn.getResponseCode() != 200) {
+                    throw new RuntimeException("Failed : HTTP error code : "
+                            + conn.getResponseCode());
+                }
 
-                    BufferedReader br = new BufferedReader(new InputStreamReader(
-                            (conn.getInputStream())));
+                BufferedReader br = new BufferedReader(new InputStreamReader(
+                        (conn.getInputStream())));
 
-                    String output;
+                String output;
 
-                    //  Log.d("Output from Server .... \n","new");
-                    while ((output = br.readLine()) != null) {
-                        Log.d("Backend", output);
-                        output1=output1+output;
+                //  Log.d("Output from Server .... \n","new");
+                while ((output = br.readLine()) != null) {
+                    Log.d("Backend", output);
+                    output1=output1+output;
 
-                    }
-                    if(output1.contains("Successfull"))
-                    {
-                        Maps.this.runOnUiThread(new Runnable() {
-                            public void run() {
-                                Toast.makeText(Maps.this, "user Present", Toast.LENGTH_SHORT).show();
-                                Object obj;
+                }
+                if(output1.contains("Successfull"))
+                {
+                    Maps.this.runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(Maps.this, "user Present", Toast.LENGTH_SHORT).show();
+                            Object obj;
 
-                                try{
-                                    obj = new JSONParser().parse(output1);
-                                    JSONObject jo = (JSONObject) obj;
-                                    String id=(String)jo.get("id");
-                                    String responseCode=(String)jo.get("responseCode");
-                                    String responseMessage=(String)jo.get("responseMessage");
-                                    JSONArray ja = (JSONArray) jo.get("resultSimilarUsers");
+                            try{
+                                obj = new JSONParser().parse(output1);
+                                JSONObject jo = (JSONObject) obj;
+                                String id=(String)jo.get("id");
+                                String responseCode=(String)jo.get("responseCode");
+                                String responseMessage=(String)jo.get("responseMessage");
+                                JSONArray ja = (JSONArray) jo.get("resultSimilarUsers");
 
-                                    Iterator itr2 = ja.iterator();
-                                    int i=1;
+                                Iterator itr2 = ja.iterator();
+                                int i=1;
+                                Maps.this.runOnUiThread(new Runnable() {
+                                    public void run() {
+                                        mMap.clear();
+                                    }
+                                });
+
+                                while (itr2.hasNext())
+                                {
+                                    //   Iterator itr1 = ( (HashMap) itr2.next()).entrySet().iterator();
+                                    JSONObject jo1 = (JSONObject) itr2.next();
+                                    String userId=(String)jo1.get("id");
+                                     s1=userId.split("@");
+                                    startLongitude=(Double)jo1.get("startLongitude");
+                                    startLatitude=(Double)jo1.get("startLatitude");
+                                    endLongitude=(Double)jo1.get("endLongitude");
+                                    endLatitude=(Double)jo1.get("endLatitude");
+
+                                    Log.d("Backend"," User "+i+" userId " + userId+" startLatitude "+startLatitude+" startLongitude "+startLongitude+" endLatitude "+endLatitude+" endLongitude "+endLongitude);
                                     Maps.this.runOnUiThread(new Runnable() {
                                         public void run() {
-                                            mMap.clear();     }
+
+                                            MarkerOptions markerOptions = new MarkerOptions();
+                                            markerOptions.position(new LatLng(startLatitude, startLongitude));
+                                            markerOptions.title(s1[0]);
+                                            mMap.addMarker(markerOptions);
+
+                                            mMap.animateCamera(CameraUpdateFactory.zoomBy(14));
+                                        }
                                     });
-
-                                    while (itr2.hasNext())
-                                    {
-                                        //   Iterator itr1 = ( (HashMap) itr2.next()).entrySet().iterator();
-                                        JSONObject jo1 = (JSONObject) itr2.next();
-                                        String userId=(String)jo1.get("id");
-                                         startLongitude=(Double)jo1.get("startLongitude");
-                                         startLatitude=(Double)jo1.get("startLatitude");
-                                         endLongitude=(Double)jo1.get("endLongitude");
-                                         endLatitude=(Double)jo1.get("endLatitude");
-                                        Log.d("Backend"," User "+i+" userId " + userId+" startLatitude "+startLatitude+" startLongitude "+startLongitude+" endLatitude "+endLatitude+" endLongitude "+endLongitude);
-                                        Maps.this.runOnUiThread(new Runnable() {
-                                            public void run() {
-
-                                                MarkerOptions markerOptions = new MarkerOptions();
-                                                markerOptions.position(new LatLng(startLatitude, startLongitude));
-                                                mMap.addMarker(markerOptions);
-                                                mMap.animateCamera(CameraUpdateFactory.zoomBy(14));
-                                            }
-                                        });
-i++;
-                                    }
-                                }
-                                catch(Exception e)
-                                {
-                                    e.printStackTrace();
+                                    i++;
                                 }
                             }
-                        });
-                    }
-                    else
-                    {
-                        Maps.this.runOnUiThread(new Runnable() {
-                            public void run() {
-                                Toast.makeText(Maps.this, "user Not Present", Toast.LENGTH_SHORT).show();
-
+                            catch(Exception e)
+                            {
+                                e.printStackTrace();
                             }
-                        });
-                        count++;
-                    }
-                    conn.disconnect();
-                    Log.d("Backend", "Thread sleeping");
+                        }
+                    });
+                }
+                else
+                {
+                    Maps.this.runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(Maps.this, "user Not Present", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                    count++;
+                }
+                conn.disconnect();
+                Log.d("Backend", "Thread sleeping");
 
 
 
@@ -767,90 +799,90 @@ i++;
 
                 String    emailID=  "";
                 emailID=     preferences.getString("emailID",emailID);
-                // String URL1="http://load1-467103352.eu-west-1.elb.amazonaws.com:8083/checkForGroup?id="+emailID;
-                String URL1="http://10.6.46.216:5000/checkForUsers?id=aditi.d@gmail.com";
+                 String URL1=Misc.Url3+"/checkForGroup?id="+emailID;
+                //String URL1="http://10.6.46.216:5000/checkForUsers?id=aditi.d@gmail.com";
                 Log.d("Backend","CallForFindTraveller1");
                 Log.d("Backend",URL1);
 
                 URL url = new URL(URL1);
 
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("POST");
-                    // conn.setRequestProperty("Accept", "application/json");
-                    Log.d("Backend", "request posted successfully");
-                    if (conn.getResponseCode() != 200) {
-                        throw new RuntimeException("Failed : HTTP error code : "
-                                + conn.getResponseCode());
-                    }
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                // conn.setRequestProperty("Accept", "application/json");
+                Log.d("Backend", "request posted successfully");
+                if (conn.getResponseCode() != 200) {
+                    throw new RuntimeException("Failed : HTTP error code : "
+                            + conn.getResponseCode());
+                }
 
-                    BufferedReader br = new BufferedReader(new InputStreamReader(
-                            (conn.getInputStream())));
+                BufferedReader br = new BufferedReader(new InputStreamReader(
+                        (conn.getInputStream())));
 
-                    String output;
+                String output;
 
-                    //  Log.d("Output from Server .... \n","new");
-                    while ((output = br.readLine()) != null) {
-                        Log.d("Backend", output);
-                        output1=output1+output;
+                //  Log.d("Output from Server .... \n","new");
+                while ((output = br.readLine()) != null) {
+                    Log.d("Backend", output);
+                    output1=output1+output;
 
-                    }
-                    if(output1.contains("Similar User"))
-                    {
-                        Maps.this.runOnUiThread(new Runnable() {
-                            public void run() {
-                                Toast.makeText(Maps.this, "user Present", Toast.LENGTH_SHORT).show();
-                                Object obj;
+                }
+                if(output1.contains("Similar User"))
+                {
+                    Maps.this.runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(Maps.this, "user Present", Toast.LENGTH_SHORT).show();
+                            Object obj;
 
-                                try{
-                                    obj = new JSONParser().parse(output1);
-                                    JSONObject jo = (JSONObject) obj;
-                                    String id=(String)jo.get("id");
-                                    String responseCode=(String)jo.get("responseCode");
-                                    String responseMessage=(String)jo.get("responseMessage");
-                                    JSONArray ja = (JSONArray) jo.get("resultSimilarUsers");
+                            try{
+                                obj = new JSONParser().parse(output1);
+                                JSONObject jo = (JSONObject) obj;
+                                String id=(String)jo.get("id");
+                                String responseCode=(String)jo.get("responseCode");
+                                String responseMessage=(String)jo.get("responseMessage");
+                                JSONArray ja = (JSONArray) jo.get("resultSimilarUsers");
 
-                                    Iterator itr2 = ja.iterator();
-                                    int i=1;
-                                    while (itr2.hasNext())
-                                    {
-                                        //   Iterator itr1 = ( (HashMap) itr2.next()).entrySet().iterator();
-                                        JSONObject jo1 = (JSONObject) itr2.next();
-                                        String userId=(String)jo1.get("id");
-                                        startLongitude=(Double)jo1.get("startLongitude");
-                                        startLatitude=(Double)jo1.get("startLatitude");
-                                        endLongitude=(Double)jo1.get("endLongitude");
-                                        endLatitude=(Double)jo1.get("endLatitude");
-                                        Log.d("Backend"," User "+i+" userId " + userId+" startLatitude "+startLatitude+" startLongitude "+startLongitude+" endLatitude "+endLatitude+" endLongitude "+endLongitude);
-                                        Maps.this.runOnUiThread(new Runnable() {
-                                            public void run() {
-                                                MarkerOptions markerOptions = new MarkerOptions();
-                                                markerOptions.position(new LatLng(startLatitude, startLongitude));
-                                                mMap.addMarker(markerOptions);
-                                                mMap.animateCamera(CameraUpdateFactory.zoomBy(14));
-                                            }
-                                        });
-                                        i++;
-                                    }
-                                }
-                                catch(Exception e)
+                                Iterator itr2 = ja.iterator();
+                                int i=1;
+                                while (itr2.hasNext())
                                 {
-                                    e.printStackTrace();
+                                    //   Iterator itr1 = ( (HashMap) itr2.next()).entrySet().iterator();
+                                    JSONObject jo1 = (JSONObject) itr2.next();
+                                    String userId=(String)jo1.get("id");
+                                    startLongitude=(Double)jo1.get("startLongitude");
+                                    startLatitude=(Double)jo1.get("startLatitude");
+                                    endLongitude=(Double)jo1.get("endLongitude");
+                                    endLatitude=(Double)jo1.get("endLatitude");
+                                    Log.d("Backend"," User "+i+" userId " + userId+" startLatitude "+startLatitude+" startLongitude "+startLongitude+" endLatitude "+endLatitude+" endLongitude "+endLongitude);
+                                    Maps.this.runOnUiThread(new Runnable() {
+                                        public void run() {
+                                            MarkerOptions markerOptions = new MarkerOptions();
+                                            markerOptions.position(new LatLng(startLatitude, startLongitude));
+                                            mMap.addMarker(markerOptions);
+                                            mMap.animateCamera(CameraUpdateFactory.zoomBy(14));
+                                        }
+                                    });
+                                    i++;
                                 }
                             }
-                        });
-                    }
-                    else
-                    {
-                        Maps.this.runOnUiThread(new Runnable() {
-                            public void run() {
-                                Toast.makeText(Maps.this, "user Not Present", Toast.LENGTH_SHORT).show();
-
+                            catch(Exception e)
+                            {
+                                e.printStackTrace();
                             }
-                        });
-                        count++;
-                    }
-                    conn.disconnect();
-                    Log.d("Backend", "Thread sleeping");
+                        }
+                    });
+                }
+                else
+                {
+                    Maps.this.runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(Maps.this, "user Not Present", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                    count++;
+                }
+                conn.disconnect();
+                Log.d("Backend", "Thread sleeping");
 
 
 
@@ -869,4 +901,5 @@ i++;
 
 
 }
+
 
