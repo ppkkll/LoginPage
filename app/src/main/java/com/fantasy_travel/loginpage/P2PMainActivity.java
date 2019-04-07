@@ -41,7 +41,7 @@ import java.util.Map;
 
 public class P2PMainActivity extends AppCompatActivity {
 
-    Button btnOnOff, btnDiscover, btnSend;
+    Button btnOnOff, btnDiscover, btnSend,btnConnect;
     ListView listView, lv2;
     TextView read_msg_box, connectionStatus;
     EditText writeMsg;
@@ -273,6 +273,28 @@ public class P2PMainActivity extends AppCompatActivity {
             }
         });
 
+        lv2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                final WifiP2pDevice device=deviceArray[i];
+                WifiP2pConfig config=new WifiP2pConfig();
+                config.deviceAddress=device.deviceAddress;
+
+                mManager.connect(mChannel, config, new WifiP2pManager.ActionListener() {
+                    @Override
+                    public void onSuccess() {
+                        Toast.makeText(getApplicationContext(),"Connected: Group Formed",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(int i) {
+                        Toast.makeText(getApplicationContext(),"Connected to "+device.deviceName,Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
+
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -282,12 +304,22 @@ public class P2PMainActivity extends AppCompatActivity {
                 sendReceive.write(msg.getBytes());
             }
         });
+
+        btnConnect.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                startRegistration();
+                discoverService();
+            }
+        });
     }
 
     private void initialWork() {
         btnOnOff=(Button) findViewById(R.id.onOff);
         btnDiscover=(Button) findViewById(R.id.discover);
         btnSend=(Button) findViewById(R.id.sendButton);
+        btnConnect = (Button)findViewById(R.id.connect);
         listView=(ListView) findViewById(R.id.peerListView);
         read_msg_box=(TextView) findViewById(R.id.readMsg);
         connectionStatus=(TextView) findViewById(R.id.connectionStatus);
