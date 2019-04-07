@@ -1,5 +1,6 @@
 package com.fantasy_travel.loginpage;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -60,6 +61,9 @@ public class LoginActivity extends AppCompatActivity {
                // Intent intent = new Intent(LoginActivity.this, Maps.class);
                 //startActivity(intent);
                 new Call().execute();
+                SharedPreferences preferences =
+                        getSharedPreferences("com.myOTP.FantasyTravel", Context.MODE_PRIVATE);
+                preferences.edit().putString("emailID",userName).commit();
             }
         });
 
@@ -90,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
             try {
 
 
-                String URL1 = Misc.Url1 + "Login?emailID=" + userName + "&password=" + password;
+                String URL1 = Misc.Url1 + "/Login?emailID=" + userName + "&password=" + password;
                 Log.d("Backend", URL1);
                 URL url = new URL(URL1);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();

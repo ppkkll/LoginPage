@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -140,7 +141,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
                                 mDrawerLayout.closeDrawers();
                                 break;
                             case R.id.nav_Daily_Commute:
-                                Intent intent_DC = new Intent( Maps.this, DailyCommuteCreatePlan.class);
+                                Intent intent_DC = new Intent( Maps.this, DailyCommuteViewPlan.class);
                                 startActivity(intent_DC);
                                 Toast.makeText(getApplicationContext(),"DailyCommute",Toast.LENGTH_SHORT).show();
                                 mDrawerLayout.closeDrawers();
@@ -334,8 +335,20 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
                 }
                 else
                 {
-                    Intent intent = new Intent(Maps.this, SettlementActivity.class);
-                    startActivity(intent);
+                    PackageManager pm = getPackageManager();
+                    try {
+                        pm.getPackageInfo("com.ubercab", PackageManager.GET_ACTIVITIES);
+                        String uri = "uber://?action=setPickup&pickup=my_location";
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setData(Uri.parse(uri));
+                        startActivity(intent);
+                    } catch (PackageManager.NameNotFoundException e) {
+                        try {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.ubercab")));
+                        } catch (android.content.ActivityNotFoundException anfe) {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.ubercab")));
+                        }
+                    }
                 }
                 break;
 
@@ -343,9 +356,8 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
             case R.id.Search_button1 :
                 if(search123.getText().toString().contains("Search")) {
                     //
-                   // new CallForFindTraveller().execute();
-                    find123.setText("Leave Journey");
-                    search123.setText("End Journey");
+                    new CallForFindTraveller().execute();
+
                 }
 
                 else{
@@ -687,10 +699,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
                             + conn.getResponseCode());
 
                 }
-                else
-                {
-                    new CallForFindTraveller1().execute();
-                }
+
                 BufferedReader br = new BufferedReader(new InputStreamReader(
                         (conn.getInputStream())));
 
@@ -843,6 +852,10 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
                                 Maps.this.runOnUiThread(new Runnable() {
                                     public void run() {
                                         mMap.clear();
+                                        MarkerOptions markerOptions = new MarkerOptions();
+                                        markerOptions.position(new LatLng(dest_latitude, dest_longitude));
+                                        mMap.addMarker(markerOptions);
+                                        mMap.addPolyline(polylineOptions1);
                                     }
                                 });
 
@@ -871,6 +884,8 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
                                     });
                                     i++;
                                 }
+                                find123.setText("Book A Taxi");
+                                search123.setText("End Journey");
                             }
                             catch(Exception e)
                             {
@@ -919,8 +934,8 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
 
                 String    emailID=  "";
                 emailID=     preferences.getString("emailID",emailID);
-                 String URL1=Misc.Url3+"/checkForGroup?id="+emailID;
-                //String URL1="http://10.6.46.216:5000/checkForUsers?id=aditi.d@gmail.com";
+                 String URL1=Misc.Url3+"/checkForUsers?id="+emailID;
+              //  String URL1="http://10.6.46.216:5000/checkForUsers?id=aditi.d@gmail.com";
                 Log.d("Backend","CallForFindTraveller1");
                 Log.d("Backend",URL1);
 
