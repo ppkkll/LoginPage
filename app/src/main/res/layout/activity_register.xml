@@ -65,6 +65,7 @@
                         android:background="@drawable/editextstyle"
                         android:hint="Phone Number"
                         android:inputType="phone" />
+
                     <EditText
                         android:id="@+id/Reg_Email"
                         android:layout_width="150dp"
