@@ -3,12 +3,15 @@ package com.fantasy_travel.loginpage;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
+import android.net.nsd.NsdServiceInfo;
 import android.net.wifi.WifiManager;
 import android.net.wifi.p2p.WifiP2pConfig;
 import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pDeviceList;
 import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
+import android.net.wifi.p2p.nsd.WifiP2pDnsSdServiceInfo;
+import android.net.wifi.p2p.nsd.WifiP2pDnsSdServiceRequest;
 import android.os.Handler;
 import android.os.Message;
 import android.os.StrictMode;
@@ -32,12 +35,14 @@ import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class P2PMainActivity extends AppCompatActivity {
 
     Button btnOnOff, btnDiscover, btnSend;
-    ListView listView;
+    ListView listView, lv2;
     TextView read_msg_box, connectionStatus;
     EditText writeMsg;
     public OutputStream outputStream;
@@ -62,6 +67,10 @@ public class P2PMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_p2p);
+
+        lv2 = (ListView) findViewById(R.id.peerListView2);
+        listView = (ListView) findViewById(R.id.peerListView);
+
         initialWork();
         myListener();
     }
@@ -80,6 +89,136 @@ public class P2PMainActivity extends AppCompatActivity {
             return true;
         }
     });
+
+    //New code
+
+    public void registerService (int port) {
+
+        NsdServiceInfo serviceInfo = new NsdServiceInfo();
+
+        serviceInfo.setServiceName("ANB");
+        serviceInfo.setServiceType("_anb._tcp");
+        serviceInfo.setPort(port);
+
+
+    }
+
+    public void initializeServerSocket () throws IOException {
+        ServerSocket serverSocket = new ServerSocket(0);
+        int localPort = serverSocket.getLocalPort();
+
+    }
+
+
+    private void startRegistration() {
+
+        Map record = new HashMap();
+        record.put("listenport", String.valueOf(8888));
+        record.put("buddy","Traveller"+(int)(Math.random()*1000));
+        record.put("available","visible");
+
+        Log.d("Backend","inside startRegistration");
+        WifiP2pDnsSdServiceInfo serviceInfo = WifiP2pDnsSdServiceInfo.newInstance("_testing","_presence._tcp",record);
+        mManager.addLocalService(mChannel, serviceInfo, new WifiP2pManager.ActionListener() {
+            @Override
+            public void onSuccess() {
+                Log.d("Backend","inside startRegistration Success");
+            }
+
+            @Override
+            public void onFailure(int i) {
+                Log.d("Backend","inside startRegistration Failure");
+            }
+        });
+    }
+    final HashMap<String, String> buddies = new HashMap<String, String>();
+    private void discoverService() {
+        Log.d("Backend","inside discoverService");
+        WifiP2pManager.DnsSdTxtRecordListener txtListener = new WifiP2pManager.DnsSdTxtRecordListener() {
+
+            /* Callback includes:
+             * fullDomain: full domain name: e.g "printer._ipp._tcp.local."
+             * record: TXT record dta as a map of key/value pairs.
+             * device: The device running the advertised service.
+             */
+
+            @Override
+            public void onDnsSdTxtRecordAvailable(String s, Map record, WifiP2pDevice device) {
+                buddies.put(device.deviceAddress, (String) record.get("buddy"));
+
+
+            }
+
+        };
+
+        WifiP2pManager.DnsSdServiceResponseListener servListener = new WifiP2pManager.DnsSdServiceResponseListener() {
+            @Override
+            public void onDnsSdServiceAvailable(String instanceName, String registrationType, WifiP2pDevice resourceType) {
+                resourceType.deviceName = buddies.containsKey(resourceType.deviceAddress) ? buddies
+                        .get(resourceType.deviceAddress) : resourceType.deviceName;
+
+                // show adapter
+                // deviceArrays=new WifiP2pDevice[buddies.values().size()];
+
+                // ArrayAdapter<String> adapter=new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1);
+
+
+
+
+                ArrayAdapter<String> adapter=new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1);
+                adapter.add(String.valueOf(resourceType.deviceName));
+                adapter.notifyDataSetChanged();
+                lv2.setAdapter(adapter);
+
+
+
+
+
+                //writeMsg.setText(resourceType.toString());
+                Log.d("Ok advertise","I am"+instanceName);
+            }
+        };
+        mManager.setDnsSdResponseListeners(mChannel, servListener, txtListener);
+        WifiP2pDnsSdServiceRequest serviceRequest = WifiP2pDnsSdServiceRequest.newInstance();
+        mManager.addServiceRequest(mChannel, serviceRequest, new WifiP2pManager.ActionListener() {
+            @Override
+            public void onSuccess() {
+                Log.d("Backend","inside discoverService Success");
+            }
+
+            @Override
+            public void onFailure(int i) {
+                Log.d("Backend","inside discoverService Failure");
+            }
+        });
+
+        mManager.discoverServices(mChannel, new WifiP2pManager.ActionListener() {
+            private static final String TAG = "Error";
+
+            @Override
+            public void onSuccess() {
+                Log.d("Backend","Success!");
+                Toast.makeText(getApplicationContext(),"Connected",Toast.LENGTH_SHORT).show();
+                //added on 03/04
+                // Intent i = getIntent();
+                //String name = i.getStringExtra("NofD");
+                //Log.d("Device Selected",name);
+                //String msg=writeMsg.getText().toString();
+                //sendReceive.write(msg.getBytes());
+            }
+
+            @Override
+            public void onFailure(int i) {
+                if (i == WifiP2pManager.P2P_UNSUPPORTED) {
+                    Log.d(TAG, "P2P isn't supported on this device.");
+                }
+            }
+
+        });
+    }
+
+
+//till here new code
 
     private void myListener() {
         btnOnOff.setOnClickListener(new View.OnClickListener() {
