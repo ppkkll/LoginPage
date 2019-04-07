@@ -48,36 +48,6 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
 
-        Button testBtn = (Button) findViewById(R.id.testButton);
-
-        testBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent( MainActivity.this, SettlementActivity.class);
-                startActivity(intent);
-            }
-
-
-        });
-
-        Button testBtm1 = findViewById(R.id.testButton1);
-        testBtm1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, DailyCommuteCreatePlan.class);
-                startActivity(intent);
-            }
-        });
-
-        Button testBtm2 = findViewById(R.id.testButton2);
-        testBtm2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, DailyCommuteViewPlan.class);
-                startActivity(intent);
-            }
-        });
-
     }
 }
 

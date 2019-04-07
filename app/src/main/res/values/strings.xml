@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LoginPage</string>
+    <string name="app_name">Fantasy Traveller</string>
     <string name="login">Login</string>
     <string name="signup">Sign Up</string>
     <string name="forget">Forget Password</string>

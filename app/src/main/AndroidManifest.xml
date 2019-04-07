@@ -85,7 +85,7 @@
             android:parentActivityName=".DailyCommuteCreatePlan">
         </activity>
         <activity android:name=".DailyCommuteViewPlan"
-            android:label="@string/app_name"
+            android:label="My Saved Plans"
             android:parentActivityName=".DailyCommuteViewPlan">
         </activity>
         <activity
