@@ -37,11 +37,11 @@ public class OTP extends AppCompatActivity {
 
 
         OTPStored=     preferences.getInt("OTP",OTPStored);
-        OTP.this.runOnUiThread(new Runnable() {
-            public void run() {
-                Toast.makeText(OTP.this, "OTP: "+ OTPStored, Toast.LENGTH_SHORT).show();
-            }
-        });
+      //  OTP.this.runOnUiThread(new Runnable() {
+        //    public void run() {
+          //      Toast.makeText(OTP.this, "OTP: "+ OTPStored, Toast.LENGTH_SHORT).show();
+           // }
+       // });
 
         validate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +91,7 @@ public class OTP extends AppCompatActivity {
 
 
                 emailID=     preferences.getString("emailID",emailID);
-                String URL1=Misc.Url2+"/UpdateStatus?emailID="+emailID;
+                String URL1=Misc.Url1+"/UpdateStatus?emailID="+emailID;
 
                 URL url = new URL(URL1);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();

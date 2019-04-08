@@ -91,6 +91,7 @@ String serverIP="10.6.48.1";
             try {
 
                 String URL1=Misc.Url1 +"/InsertDataEntry?phoneNumber="+phoneNumber+"&emailID="+emailID+"&age="+age+"&sex="+sex+"&name=shubham&password="+password;
+                Log.d("Backend", URL1);
                 URL url = new URL(URL1);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
@@ -172,7 +173,7 @@ String serverIP="10.6.48.1";
 
             try {
 
-                String URL1=Misc.Url1+"/otpGenerate?phoneNumber="+phoneNumber;
+                String URL1=Misc.Url2+"/otpGenerate?phoneNumber="+phoneNumber;
                 URL url = new URL(URL1);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
