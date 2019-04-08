@@ -21,6 +21,10 @@
     <string name="test">Test Mode</string>
     <string name="IPAdddress">10.6.35.144:8080</string>
     <string name="map_Dashboard_Indicator"> ← Dashboard</string>
+    <string name="Remember_me">Remember me</string>
+    <string name="password">Password</string>
+    <string name="loginHint">UserName/Email/Phone</string>
+    <string name="SocialLogin">Social Media Login</string>
 
 
     //Preferences data
