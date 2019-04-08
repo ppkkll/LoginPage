@@ -65,9 +65,9 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener{
     private Double startLongitude;
-    private  Double startLatitude;
-    private  Double endLongitude;
-    private  Double endLatitude;
+    private Double startLatitude;
+    private Double endLongitude;
+    private Double endLatitude;
     private GoogleMap mMap;
     private GoogleApiClient googleApiClient;
     private LocationRequest locationRequest;
@@ -86,7 +86,6 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
     private DrawerLayout mDrawerLayout;
     Button  find123, search123;
 
-    private ActionBarDrawerToggle mToggle;
     //public
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +93,6 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
         setContentView(R.layout.activity_maps);
 
         mDrawerLayout = findViewById(R.id.Map_Drawer);
-
         mDrawerLayout.addDrawerListener(
                 new DrawerLayout.DrawerListener() {
                     @Override
@@ -119,8 +117,6 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
                 });
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(
-
-
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -161,12 +157,9 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
                                 Toast.makeText(getApplicationContext(),"LouOut",Toast.LENGTH_SHORT).show();
                                 finish();
                         }
-
-
                         return true;
                     }
                 });
-
 
         find123 = (Button) findViewById(R.id.Search_button);
         search123 = (Button) findViewById(R.id.Search_button1);
@@ -501,16 +494,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback,
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(mToggle.onOptionsItemSelected(item)){
-
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
 
     class CallForDis extends AsyncTask {

@@ -1,177 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Map_Drawer"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="10dp"
-    android:orientation="vertical"
-    android:background="@color/colorBackground"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-
-    <android.support.v7.widget.LinearLayoutCompat
-        android:layout_margin="10dp"
-        app:cardCornerRadius="4dp"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:background="@color/colorBackground"
+        tools:context=".MainActivity">
 
-        <LinearLayout
-            android:orientation="vertical"
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_margin="10dp"
+            app:cardCornerRadius="4dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-            <TextView
-                android:id="@+id/header"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginTop="10dp"
-                android:text="Plan Name"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/Plan_Name"
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/header"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginTop="10dp"
-                android:hint="Name your plan"
-                android:textStyle="" />
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/header1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/Plan_Name"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginTop="10dp"
-                android:text="Starting Location"
-                android:textStyle="bold" />
 
-            <fragment
-                    android:id="@+id/starting_location_autocomplete"
+                <TextView
+                    android:id="@+id/header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="10dp"
+                    android:text="Plan Name"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/Plan_Name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/header"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="10dp"
+                    android:hint="Name your plan"
+                    android:textStyle="" />
+
+                <TextView
+                    android:id="@+id/header1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/Plan_Name"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="10dp"
+                    android:text="Starting Location"
+                    android:textStyle="bold" />
+
+                <fragment
+                        android:id="@+id/starting_location_autocomplete"
+                        android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                         android:layout_below="@+id/header1"/>
+
+                <TextView
+                    android:id="@+id/starting_location_autocomplete_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No Places Selected" />
+
+                <TextView
+                    android:id="@+id/header2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/starting_location_autocomplete"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="10dp"
+                    android:text="Destination"
+                    android:textStyle="bold" />
+
+                <fragment
+                    android:id="@+id/destination_location_autocomplete"
                     android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                     android:layout_below="@+id/header1"/>
+                    android:layout_below="@+id/header2"/>
 
-            <TextView
-                android:id="@+id/starting_location_autocomplete_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="No Places Selected" />
+                <TextView
+                    android:id="@+id/destination_location_autocomplete_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No Places Selected" />
 
-            <TextView
-                android:id="@+id/header2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/starting_location_autocomplete"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginTop="10dp"
-                android:text="Destination"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/header3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/autoCompleteTextView1"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="10dp"
+                    android:text="Time"
+                    android:textStyle="bold" />
 
-            <fragment
-                android:id="@+id/destination_location_autocomplete"
-                android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/header2"/>
+                <EditText
+                    android:id="@+id/editTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Select Time..."
+                    android:textColor="#090"
+                    android:textColorHint="#090"
+                    android:editable="false"
+                    android:inputType="time"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/destination_location_autocomplete_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="No Places Selected" />
+                <TextView
+                    android:id="@+id/header4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/editTime"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="10dp"
+                    android:text="Mode"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/header3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/autoCompleteTextView1"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginTop="10dp"
-                android:text="Time"
-                android:textStyle="bold" />
+                <Spinner
+                    android:id="@+id/spinner1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/header4"
+                    android:entries="@array/mode_arrays"
+                    android:prompt="@string/prompt_mode" />
 
-            <EditText
-                android:id="@+id/editTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:hint="Select Time..."
-                android:textColor="#090"
-                android:textColorHint="#090"
-                android:editable="false"
-                android:inputType="time"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/header5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/editTime"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="10dp"
+                    android:text="Preferred Travel Partner ?"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/header4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/editTime"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginTop="10dp"
-                android:text="Mode"
-                android:textStyle="bold" />
+                <Spinner
+                    android:id="@+id/spinner2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/header5"
+                    android:entries="@array/sex_arrays"
+                    android:prompt="@string/prompt_sex" />
 
-            <Spinner
-                android:id="@+id/spinner1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/header4"
-                android:entries="@array/mode_arrays"
-                android:prompt="@string/prompt_mode" />
+                <Button
+                    android:id="@+id/plan_save_btn"
+                    android:background="@drawable/buttonstyle"
+                    android:textColor="@color/colorBackground"
+                    android:text="save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="40dp"/>
 
-            <TextView
-                android:id="@+id/header5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/editTime"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginTop="10dp"
-                android:text="Preferred Travel Partner ?"
-                android:textStyle="bold" />
+                <Button
+                    android:id="@+id/plan_cancel_btn"
+                    android:background="@drawable/buttonstyle"
+                    android:textColor="@color/colorBackground"
+                    android:text="cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"/>
 
-            <Spinner
-                android:id="@+id/spinner2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/header5"
-                android:entries="@array/sex_arrays"
-                android:prompt="@string/prompt_sex" />
+            </LinearLayout>
+        </android.support.v7.widget.LinearLayoutCompat>
+    </LinearLayout>
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/menu_header"
+        app:menu="@menu/activity_menu">
 
-            <Button
-                android:id="@+id/plan_save_btn"
-                android:background="@drawable/buttonstyle"
-                android:textColor="@color/colorBackground"
-                android:text="save"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="40dp"/>
-
-            <Button
-                android:id="@+id/plan_cancel_btn"
-                android:background="@drawable/buttonstyle"
-                android:textColor="@color/colorBackground"
-                android:text="cancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"/>
-
-        </LinearLayout>
-    </android.support.v7.widget.LinearLayoutCompat>
-</LinearLayout>
+    </android.support.design.widget.NavigationView>
+</android.support.v4.widget.DrawerLayout>

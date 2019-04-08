@@ -59,7 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/colorsidebar_Header"
-                    android:text="CheckBox" />
+                    android:text="Remember me" />
 
                 <Button
                     android:id="@+id/Login_loginButton"

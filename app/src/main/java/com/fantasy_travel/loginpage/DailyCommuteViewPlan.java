@@ -6,12 +6,15 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -43,6 +46,8 @@ public class DailyCommuteViewPlan extends AppCompatActivity {
 
     RecyclerView recyclerView;
     RecyclerViewAdapter recyclerViewAdapter;
+    private DrawerLayout mDrawerLayout;
+
     List<PlanModel> planModelList;
     String username = "";
 
@@ -51,7 +56,74 @@ public class DailyCommuteViewPlan extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_commute_my_plans);
 
+        mDrawerLayout = findViewById(R.id.Map_Drawer);
+        mDrawerLayout.addDrawerListener(
+                new DrawerLayout.DrawerListener() {
+                    @Override
+                    public void onDrawerSlide(View drawerView, float slideOffset) {
+                        // Respond when the drawer's position changes
+                    }
 
+                    @Override
+                    public void onDrawerOpened(View drawerView) {
+                        // Respond when the drawer is opened
+                    }
+
+                    @Override
+                    public void onDrawerClosed(View drawerView) {
+                        // Respond when the drawer is closed
+                    }
+
+                    @Override
+                    public void onDrawerStateChanged(int newState) {
+                        // Respond when the drawer motion state changes
+                    }
+                });
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        // set item as selected to persist highlight
+                        menuItem.setChecked(true);
+                        // close drawer when item is tapped
+                        mDrawerLayout.closeDrawers();
+
+                        // Add code here to update the UI based on the item selected
+                        // For example, swap UI fragments here
+                        int id = menuItem.getItemId();
+
+                        switch (id){
+                            case R.id.nav_account:
+                                Toast.makeText(getApplicationContext(),"Account",Toast.LENGTH_SHORT).show();
+                                Intent intent_Account = new Intent( DailyCommuteViewPlan.this, AccountActivity.class);
+                                startActivity(intent_Account);
+                                mDrawerLayout.closeDrawers();
+                                break;
+                            case R.id.nav_Daily_Commute:
+                                Intent intent_DC = new Intent( DailyCommuteViewPlan.this, DailyCommuteViewPlan.class);
+                                startActivity(intent_DC);
+                                Toast.makeText(getApplicationContext(),"DailyCommute",Toast.LENGTH_SHORT).show();
+                                mDrawerLayout.closeDrawers();
+                                break;
+                            case R.id.nav_Find_Fellow_Traveller:
+                                Intent intent_FFT = new Intent( DailyCommuteViewPlan.this, Maps.class);
+                                startActivity(intent_FFT);
+                                Toast.makeText(getApplicationContext(),"FindFellowTraveller",Toast.LENGTH_SHORT).show();
+                                mDrawerLayout.closeDrawers();
+                                break;
+                            case R.id.nav_Setting:
+                                Toast.makeText(getApplicationContext(),"Setting",Toast.LENGTH_SHORT).show();
+                                Intent intent_Setting = new Intent( DailyCommuteViewPlan.this, AccountActivity.class);
+                                startActivity(intent_Setting);
+                                break;
+                            case R.id.nav_LogOut:
+                                Toast.makeText(getApplicationContext(),"LouOut",Toast.LENGTH_SHORT).show();
+                                finish();
+                        }
+                        return true;
+                    }
+                });
         recyclerView = (RecyclerView) findViewById(R.id.rv);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
