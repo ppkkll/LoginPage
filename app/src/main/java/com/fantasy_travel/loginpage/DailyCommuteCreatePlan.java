@@ -1,5 +1,7 @@
 package com.fantasy_travel.loginpage;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -189,7 +191,23 @@ public class DailyCommuteCreatePlan extends AppCompatActivity {
                 Toast.makeText(DailyCommuteCreatePlan.this, "Plan : " + planName.getText().toString() +"is Saved.",Toast.LENGTH_SHORT).show();
                 new Call_Save().execute();
 
-                Intent intent = new Intent(DailyCommuteCreatePlan.this, DailyCommuteMapActivity.class);
+                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+                Intent notificationIntent = new Intent(DailyCommuteCreatePlan.this, AlarmReceiver.class);
+                PendingIntent broadcast = PendingIntent.getBroadcast(DailyCommuteCreatePlan.this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                Calendar cal = Calendar.getInstance();
+                cal.add(Calendar.SECOND, 30);
+                time.replaceAll("AM","").replaceAll("PM","");
+                String[] chooseTime1=time.split(":");
+                Log.d("Backend", "min in mobile" + String.valueOf(Calendar.MINUTE));
+                Log.d("Backend", "sec in mobile" + String.valueOf(Calendar.SECOND));
+                Log.d("Backend", "hour in mobile" + String.valueOf(Calendar.HOUR));
+               // cal.add(Calendar.MINUTE, Integer.parseInt(chooseTime1[1].substring(0,chooseTime1[1].length()-2)));
+              //  cal.add(Calendar.MINUTE, Integer.parseInt(chooseTime1[1].substring(0,chooseTime1[1].length()-2)));
+              //  cal.add(Calendar.HOUR, Integer.parseInt(chooseTime1[0]));
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
+                Intent intent = new Intent(DailyCommuteCreatePlan.this, DailyCommuteViewPlan.class);
                 startActivity(intent);
             }
         });
@@ -197,6 +215,8 @@ public class DailyCommuteCreatePlan extends AppCompatActivity {
         cancel_btn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 Intent intent = new Intent(DailyCommuteCreatePlan.this, DailyCommuteViewPlan.class);
                 startActivity(intent);
             }
@@ -250,7 +270,7 @@ private class CustomOnItemSelectedListener implements AdapterView.OnItemSelected
                         startActivity(intent);
                     }
                     else if(output.contains("500"))
-                    {  Log.d("Backend", "Contains 200");
+                    {  Log.d("Backend", "Contains 500");
                         DailyCommuteCreatePlan.this.runOnUiThread(new Runnable() {
                             public void run() {
                                 Toast.makeText(DailyCommuteCreatePlan.this, "Account Not Active", Toast.LENGTH_SHORT).show();

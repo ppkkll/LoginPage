@@ -90,7 +90,7 @@ String serverIP="10.6.48.1";
 
             try {
 
-                String URL1=Misc.Url1+"/InsertDataEntry?phoneNumber="+phoneNumber+"&emailID="+emailID+"&age="+age+"&sex="+sex+"&name=shubham&password="+password;
+                String URL1=Misc.Url1 +"/InsertDataEntry?phoneNumber="+phoneNumber+"&emailID="+emailID+"&age="+age+"&sex="+sex+"&name=shubham&password="+password;
                 URL url = new URL(URL1);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
