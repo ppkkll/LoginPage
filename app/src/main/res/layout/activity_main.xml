@@ -9,11 +9,6 @@
     android:background="@color/colorBackground"
     tools:context=".MainActivity">
 
-    <!--<include
-        layout="@layout/activity_toobar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></include>-->
-
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_margin="30dp"
         app:cardCornerRadius="4dp"

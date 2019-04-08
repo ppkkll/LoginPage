@@ -1,29 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:fillViewport="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="10dp"
         android:orientation="vertical"
         android:background="@color/colorBackground"
         tools:context=".MainActivity">
 
-
-        <android.support.v7.widget.LinearLayoutCompat
-            android:layout_margin="30dp"
-            app:cardCornerRadius="4dp"
+        <LinearLayout
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -41,7 +35,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="40dp"
                     android:background="@drawable/editextstyle"
-                    android:hint="UserName/Email/Phone"
+                    android:hint="@string/loginHint"
                     android:inputType="textEmailAddress" />
 
                 <EditText
@@ -51,22 +45,23 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="40dp"
                     android:background="@drawable/editextstyle"
-                    android:hint="Password"
+                    android:hint="@string/password"
                     android:inputType="textPassword" />
 
                 <CheckBox
                     android:id="@+id/checkBox"
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/colorsidebar_Header"
-                    android:text="Remember me" />
+                    android:text="@string/Remember_me" />
 
                 <Button
                     android:id="@+id/Login_loginButton"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/buttonstyle"
                     android:text="@string/login"
                     android:textColor="@color/colorBackground" />
@@ -87,8 +82,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="25dp"
-                        android:text="Social Media Login"
-                        android:textSize="23dp" />
+                        android:text="@string/SocialLogin"
+                        android:textSize="23sp" />
 
                     <LinearLayout
 
@@ -118,8 +113,6 @@
                             android:layout_marginRight="15dp"
                             android:src="@drawable/instgram" />
                 </LinearLayout>
-
-            </LinearLayout>
-        </android.support.v7.widget.LinearLayoutCompat>
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>
